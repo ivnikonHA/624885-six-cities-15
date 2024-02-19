@@ -1,10 +1,10 @@
-import MainPage from '../../pages/main/main-page';
+import MainPage from '../../pages/main-page/main-page';
 
 type AppProps = {
   placesCount: number;
 }
 
-export default function App({placesCount}:AppProps) : JSX.Element {
+export default function App({ placesCount }: AppProps): JSX.Element {
   return (
     <MainPage placesCount={placesCount}></MainPage>
   );
