@@ -1,5 +1,6 @@
 import Card from '../../components/card/card';
 import Header from '../../components/header/header';
+import { mockOffers } from '../../mocks/offers-mock';
 
 type MainPageProps = {
   placesCount: number;
@@ -68,11 +69,17 @@ export default function MainPage({placesCount}:MainPageProps) : JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <Card></Card>
-                <Card></Card>
-                <Card></Card>
-                <Card></Card>
-                <Card></Card>
+                {mockOffers().map((offer) => (
+                  <Card
+                    key={offer.id}
+                    title = {offer.title}
+                    type = {offer.type}
+                    price = {offer.price}
+                    isFavorite = {offer.isFavorite}
+                    isPremium = {offer.isPremium}
+                    previewImage = {offer.previewImage}
+                  />
+                ))}
               </div>
             </section>
             <div className="cities__right-section">
