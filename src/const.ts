@@ -5,4 +5,13 @@ const SortOptions = {
   TOP_RATED: 'Top rated first'
 };
 
-export {SortOptions};
+const CitiesListItems = {
+  PARIS: 'Paris',
+  COLOGNE: 'Cologne',
+  BRUSSELS: 'Brussels',
+  AMSTERDAM: 'Amsterdam',
+  HAMBURG: 'Hamburg',
+  DUSSELDORF: 'Dusseldorf'
+};
+
+export {SortOptions, CitiesListItems};
