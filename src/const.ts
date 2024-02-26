@@ -17,7 +17,13 @@ const CitiesListItems = {
 const enum AppRoute {
   Root = '/',
   Login = '/login',
-  Favorites = '/favorites'
+  Favorites = '/favorites',
+  Offer = '/offer/:id'
 }
 
-export {SortOptions, CitiesListItems, AppRoute};
+const enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NOAUTH'
+}
+
+export {SortOptions, CitiesListItems, AppRoute, AuthorizationStatus};
