@@ -9,7 +9,7 @@ export default function NotFoundPage() {
     marginRight: 'auto',
     marginLeft: 'auto',
     paddingTop: '94px',
-    'text-align': 'center',
+    textAlign: 'center' as const,
     backgroundImage: 'url(../img/ico-no-results.svg)',
     backgroundSize: '60px 73px',
     backgroundPosition: 'center top',
