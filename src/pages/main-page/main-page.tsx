@@ -72,12 +72,13 @@ export default function MainPage({placesCount}:MainPageProps) : JSX.Element {
                 {mockOffers().map((offer) => (
                   <Card
                     key={offer.id}
-                    title = {offer.title}
-                    type = {offer.type}
-                    price = {offer.price}
-                    isFavorite = {offer.isFavorite}
-                    isPremium = {offer.isPremium}
-                    previewImage = {offer.previewImage}
+                    title={offer.title}
+                    type={offer.type}
+                    price={offer.price}
+                    isFavorite={offer.isFavorite}
+                    isPremium={offer.isPremium}
+                    previewImage={offer.previewImage}
+                    rating={offer.rating}
                   />
                 ))}
               </div>

@@ -1,3 +1,5 @@
+import Stars from '../stars/stars';
+
 type CardProps = {
   title: string;
   type: string;
@@ -5,9 +7,10 @@ type CardProps = {
   isFavorite: boolean;
   isPremium: boolean;
   previewImage: string;
+  rating: number;
 }
 
-export default function Card({title, type, price, isFavorite, isPremium, previewImage }: CardProps) : JSX.Element {
+export default function Card({title, type, price, isFavorite, isPremium, previewImage, rating }: CardProps) : JSX.Element {
   return (
     <article className="cities__card place-card">
       {isPremium &&
@@ -37,12 +40,7 @@ export default function Card({title, type, price, isFavorite, isPremium, preview
             <span className="visually-hidden">To bookmarks</span>
           </button>
         </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={{width: '80%'}}></span>
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <Stars rating = {rating} />
         <h2 className="place-card__name">
           <a href="#">{title}</a>
         </h2>

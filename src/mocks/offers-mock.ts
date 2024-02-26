@@ -44,7 +44,7 @@ const mockOfferArray: offerType[] = [
     },
     isFavorite: false,
     isPremium: true,
-    rating: 2.6
+    rating: 4.6
   },
   {
     id: '0a4a8329-519e-4553-b463-d00a35f24a46',
@@ -66,7 +66,7 @@ const mockOfferArray: offerType[] = [
       zoom: 16
     },
     isFavorite: true,
-    isPremium: true,
+    isPremium: false,
     rating: 2.5
   },
   {
