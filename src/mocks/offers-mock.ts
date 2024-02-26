@@ -4,22 +4,22 @@ type offerType = {
   type: ('hotel' | 'apartment' | 'room' | 'house');
   price: number;
   previewImage: string;
-  city: {
-    name: string;
-    location: {
-      latitude: number;
-      longitude: number;
-      zoom: number;
-    };
-  };
-  location: {
-    latitude: number;
-    longitude: number;
-    zoom: number;
-  };
+  city: cityType;
+  location: locationType;
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
+};
+
+type cityType = {
+  name: ('Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf');
+  location: locationType;
+}
+
+type locationType = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
 };
 
 const mockOfferArray: offerType[] = [
