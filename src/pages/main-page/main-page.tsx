@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import Card from '../../components/card/card';
 import CitiesList from '../../components/cities-list/cities-list';
 import Header from '../../components/header/header';
@@ -13,6 +14,9 @@ export default function MainPage({placesCount}:MainPageProps) : JSX.Element {
   const isSortingFormOpened = false;
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>6 Cities</title>
+      </Helmet>
       <Header></Header>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>

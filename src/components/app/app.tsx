@@ -7,6 +7,7 @@ import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import PrivateRoute from '../private-route/private-route';
 import getAuthorization from '../../mocks/authorization-mock';
+import { HelmetProvider } from 'react-helmet-async';
 
 type AppProps = {
   placesCount: number;
@@ -14,33 +15,35 @@ type AppProps = {
 
 export default function App({ placesCount }: AppProps): JSX.Element {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path={AppRoute.Root}
-          element={<MainPage placesCount={placesCount}></MainPage>}
-        />
-        <Route
-          path={AppRoute.Favorites}
-          element={
-            <PrivateRoute authorizationStatus={getAuthorization()}>
-              <FavoritesPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={AppRoute.Login}
-          element={<LoginPage />}
-        />
-        <Route
-          path={AppRoute.Offer}
-          element={<OfferPage />}
-        />
-        <Route
-          path='*'
-          element={<NotFoundPage />}
-        />
-      </Routes>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path={AppRoute.Root}
+            element={<MainPage placesCount={placesCount}></MainPage>}
+          />
+          <Route
+            path={AppRoute.Favorites}
+            element={
+              <PrivateRoute authorizationStatus={getAuthorization()}>
+                <FavoritesPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={AppRoute.Login}
+            element={<LoginPage />}
+          />
+          <Route
+            path={AppRoute.Offer}
+            element={<OfferPage />}
+          />
+          <Route
+            path='*'
+            element={<NotFoundPage />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }

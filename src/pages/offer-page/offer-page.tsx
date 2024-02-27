@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import Header from '../../components/header/header';
 import { AuthorizationStatus } from '../../const';
 import getAuthorization from '../../mocks/authorization-mock';
@@ -6,6 +7,9 @@ export default function OfferPage() : JSX.Element {
   const isAuthorized = getAuthorization() === AuthorizationStatus.Auth;
   return (
     <div className="page">
+      <Helmet>
+        <title>6 Cities : Offer page</title>
+      </Helmet>
       <Header></Header>
       <main className="page__main page__main--offer">
         <section className="offer">

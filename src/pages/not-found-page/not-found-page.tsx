@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../../components/header/header';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 export default function NotFoundPage() {
   const notFoundWrapperStyle = {
@@ -23,6 +24,9 @@ export default function NotFoundPage() {
   };
   return (
     <React.Fragment>
+      <Helmet>
+        <title>6 Cities : Error page</title>
+      </Helmet>
       <Header></Header>
       <div style={notFoundWrapperStyle}>
         <b style={notFoundStyle}>Page not found</b>
