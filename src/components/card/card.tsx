@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import Stars from '../stars/stars';
+import { AppRoute } from '../../const';
 
 type CardProps = {
   title: string;
@@ -42,7 +44,7 @@ export default function Card({title, type, price, isFavorite, isPremium, preview
         </div>
         <Stars rating = {rating} />
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={AppRoute.Offer}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
