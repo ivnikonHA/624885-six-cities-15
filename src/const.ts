@@ -14,4 +14,16 @@ const CitiesListItems = {
   DUSSELDORF: 'Dusseldorf'
 };
 
-export {SortOptions, CitiesListItems};
+const enum AppRoute {
+  Root = '/',
+  Login = '/login',
+  Favorites = '/favorites',
+  Offer = '/offer/:id'
+}
+
+const enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NOAUTH'
+}
+
+export {SortOptions, CitiesListItems, AppRoute, AuthorizationStatus};
