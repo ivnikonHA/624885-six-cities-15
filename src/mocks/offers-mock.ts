@@ -1,26 +1,4 @@
-type offerType = {
-  id: string;
-  title: string;
-  type: ('hotel' | 'apartment' | 'room' | 'house');
-  price: number;
-  previewImage: string;
-  city: cityType;
-  location: locationType;
-  isFavorite: boolean;
-  isPremium: boolean;
-  rating: number;
-};
-
-type cityType = {
-  name: ('Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf');
-  location: locationType;
-}
-
-type locationType = {
-  latitude: number;
-  longitude: number;
-  zoom: number;
-};
+import { offerType } from '../types/offers';
 
 const mockOfferArray: offerType[] = [
   {
@@ -140,8 +118,8 @@ const mockOfferArray: offerType[] = [
   }
 ];
 
-function mockOffers() : Array<offerType> {
+function getMockOffers() : Array<offerType> {
   return mockOfferArray;
 }
 
-export {mockOffers, mockOfferArray};
+export {getMockOffers};
