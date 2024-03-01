@@ -1,10 +1,10 @@
 import { Helmet } from 'react-helmet-async';
-import Card from '../../components/card/card';
+
 import CitiesList from '../../components/cities-list/cities-list';
 import Header from '../../components/header/header';
-import SortingForm from '../../components/sorting-form/sorting-form';
-import { CitiesListItems, SortOptions } from '../../const';
+import { CitiesListItems } from '../../const';
 import { offerType } from '../../types/offers';
+import CardsList from '../../components/cards-list/cards-list';
 
 
 type MainPageProps = {
@@ -13,7 +13,6 @@ type MainPageProps = {
 }
 
 export default function MainPage({placesCount, offers}:MainPageProps) : JSX.Element {
-  const isSortingFormOpened = false;
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -29,29 +28,7 @@ export default function MainPage({placesCount, offers}:MainPageProps) : JSX.Elem
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{placesCount} places to stay in Amsterdam</b>
-              <SortingForm
-                items={Object.values(SortOptions)}
-                currentItem={SortOptions.PRICE_ASCENDING}
-                isOpened= {isSortingFormOpened}
-              />
-              <div className="cities__places-list places__list tabs__content">
-                {offers.map((offer) => (
-                  <Card
-                    key={offer.id}
-                    title={offer.title}
-                    type={offer.type}
-                    price={offer.price}
-                    isFavorite={offer.isFavorite}
-                    isPremium={offer.isPremium}
-                    previewImage={offer.previewImage}
-                    rating={offer.rating}
-                  />
-                ))}
-              </div>
-            </section>
+            <CardsList placesCount={placesCount} offers={offers} />
             <div className="cities__right-section">
               <section className="cities__map map"></section>
             </div>
