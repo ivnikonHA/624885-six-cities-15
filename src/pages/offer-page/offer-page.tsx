@@ -2,9 +2,17 @@ import { Helmet } from 'react-helmet-async';
 import Header from '../../components/header/header';
 import { AuthorizationStatus } from '../../const';
 import getAuthorization from '../../mocks/authorization-mock';
+import { useParams } from 'react-router-dom';
+import { offerType } from '../../types/offers';
 
-export default function OfferPage() : JSX.Element {
+type offerPageProps = {
+  offers: Array<offerType>;
+}
+
+export default function OfferPage({offers}:offerPageProps) : JSX.Element {
   const isAuthorized = getAuthorization() === AuthorizationStatus.Auth;
+  const {id} = useParams();
+  const {title, type} = offers.find((offer:offerType) =>(offer.id === id));
   return (
     <div className="page">
       <Helmet>
@@ -42,7 +50,7 @@ export default function OfferPage() : JSX.Element {
               </div>
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
-                  Beautiful &amp; luxurious studio at great location
+                  {title}
                 </h1>
                 <button className="offer__bookmark-button button" type="button">
                   <svg className="offer__bookmark-icon" width="31" height="33">
@@ -60,7 +68,7 @@ export default function OfferPage() : JSX.Element {
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  Apartment
+                  {type}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
                   3 Bedrooms

@@ -47,7 +47,7 @@ export default function Card({offer, handler }: CardProps) : JSX.Element {
         </div>
         <Stars rating = {rating} />
         <h2 className="place-card__name">
-          <Link to={AppRoute.Offer}>{title}</Link>
+          <Link to={`${AppRoute.Offer}${offer.id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

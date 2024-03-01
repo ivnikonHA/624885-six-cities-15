@@ -37,8 +37,8 @@ export default function App({ placesCount, offers }: AppProps): JSX.Element {
             element={<LoginPage />}
           />
           <Route
-            path={AppRoute.Offer}
-            element={<OfferPage />}
+            path={AppRoute.OfferId}
+            element={<OfferPage offers={offers}/>}
           />
           <Route
             path='*'
