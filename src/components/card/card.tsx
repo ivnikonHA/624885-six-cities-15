@@ -1,20 +1,23 @@
 import { Link } from 'react-router-dom';
 import Stars from '../stars/stars';
 import { AppRoute } from '../../const';
+import { offerType } from '../../types/offers';
 
 type CardProps = {
-  title: string;
-  type: string;
-  price: number;
-  isFavorite: boolean;
-  isPremium: boolean;
-  previewImage: string;
-  rating: number;
+  offer: offerType;
+  handler: (offer:offerType | null) => void;
 }
 
-export default function Card({title, type, price, isFavorite, isPremium, previewImage, rating }: CardProps) : JSX.Element {
+export default function Card({offer, handler }: CardProps) : JSX.Element {
+  const {title, type, price, isFavorite, isPremium, previewImage, rating } = offer;
+  const handlerCardMouseEnter = () => handler(offer);
+  const handlerCardMouseLeave = () => handler(null);
   return (
-    <article className="cities__card place-card">
+    <article
+      className="cities__card place-card"
+      onMouseEnter={handlerCardMouseEnter}
+      onMouseLeave={handlerCardMouseLeave}
+    >
       {isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>

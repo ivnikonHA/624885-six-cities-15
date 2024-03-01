@@ -2,6 +2,8 @@ import { offerType } from '../../types/offers';
 import SortingForm from '../../components/sorting-form/sorting-form';
 import Card from '../../components/card/card';
 import { SortOptions } from '../../const';
+import { useState } from 'react';
+import { Nullable } from 'vitest';
 
 type cardsListProps = {
   placesCount: number;
@@ -10,6 +12,10 @@ type cardsListProps = {
 
 export default function CardsList({placesCount, offers}:cardsListProps) : JSX.Element {
   const isSortingFormOpened = false;
+  const [, setActiveOffer] = useState<Nullable<offerType>>(null);
+  const handleCardHover = (offer: offerType | null) => {
+    setActiveOffer(offer);
+  };
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
@@ -23,13 +29,8 @@ export default function CardsList({placesCount, offers}:cardsListProps) : JSX.El
         {offers.map((offer) => (
           <Card
             key={offer.id}
-            title={offer.title}
-            type={offer.type}
-            price={offer.price}
-            isFavorite={offer.isFavorite}
-            isPremium={offer.isPremium}
-            previewImage={offer.previewImage}
-            rating={offer.rating}
+            offer={offer}
+            handler={handleCardHover}
           />
         ))}
       </div>
