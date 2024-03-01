@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import { getRandomNumber } from './utils';
+import { getMockOffers } from './mocks/offers-mock';
 
 const placesCount = getRandomNumber(1,999);
+const mockOffers = getMockOffers();
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,6 +13,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App placesCount={placesCount}></App>
+    <App placesCount={placesCount} offers={mockOffers}></App>
   </React.StrictMode>
 );

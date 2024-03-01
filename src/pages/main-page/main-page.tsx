@@ -4,13 +4,15 @@ import CitiesList from '../../components/cities-list/cities-list';
 import Header from '../../components/header/header';
 import SortingForm from '../../components/sorting-form/sorting-form';
 import { CitiesListItems, SortOptions } from '../../const';
-import { mockOffers } from '../../mocks/offers-mock';
+import { offerType } from '../../types/offers';
+
 
 type MainPageProps = {
   placesCount: number;
+  offers: Array<offerType>;
 }
 
-export default function MainPage({placesCount}:MainPageProps) : JSX.Element {
+export default function MainPage({placesCount, offers}:MainPageProps) : JSX.Element {
   const isSortingFormOpened = false;
   return (
     <div className="page page--gray page--main">
@@ -36,7 +38,7 @@ export default function MainPage({placesCount}:MainPageProps) : JSX.Element {
                 isOpened= {isSortingFormOpened}
               />
               <div className="cities__places-list places__list tabs__content">
-                {mockOffers().map((offer) => (
+                {offers.map((offer) => (
                   <Card
                     key={offer.id}
                     title={offer.title}

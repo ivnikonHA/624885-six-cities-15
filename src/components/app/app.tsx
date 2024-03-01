@@ -8,19 +8,21 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import PrivateRoute from '../private-route/private-route';
 import getAuthorization from '../../mocks/authorization-mock';
 import { HelmetProvider } from 'react-helmet-async';
+import { offerType } from '../../types/offers';
 
 type AppProps = {
   placesCount: number;
+  offers: Array<offerType>;
 }
 
-export default function App({ placesCount }: AppProps): JSX.Element {
+export default function App({ placesCount, offers }: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Root}
-            element={<MainPage placesCount={placesCount}></MainPage>}
+            element={<MainPage placesCount={placesCount} offers={offers}></MainPage>}
           />
           <Route
             path={AppRoute.Favorites}
