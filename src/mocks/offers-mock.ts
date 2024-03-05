@@ -20,7 +20,7 @@ const mockOfferArray: offerType[] = [
       longitude: 2.342499,
       zoom: 16
     },
-    isFavorite: false,
+    isFavorite: true,
     isPremium: true,
     rating: 4.6
   },
@@ -44,7 +44,7 @@ const mockOfferArray: offerType[] = [
       zoom: 16
     },
     isFavorite: true,
-    isPremium: false,
+    isPremium: true,
     rating: 2.5
   },
   {
@@ -100,7 +100,7 @@ const mockOfferArray: offerType[] = [
     price: 236,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/10.jpg',
     city: {
-      name: 'Paris',
+      name: 'Amsterdam',
       location: {
         latitude: 48.85661,
         longitude: 2.351499,
@@ -112,7 +112,7 @@ const mockOfferArray: offerType[] = [
       longitude: 2.375499,
       zoom: 16
     },
-    isFavorite: false,
+    isFavorite: true,
     isPremium: false,
     rating: 3.7
   }

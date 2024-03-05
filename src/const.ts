@@ -18,7 +18,6 @@ const enum AppRoute {
   Root = '/',
   Login = '/login',
   Favorites = '/favorites',
-  Offer = '/offer/',
   OfferId = '/offer/:id'
 }
 
@@ -27,4 +26,9 @@ const enum AuthorizationStatus {
   NoAuth = 'NOAUTH'
 }
 
-export {SortOptions, CitiesListItems, AppRoute, AuthorizationStatus};
+const enum Pages {
+  Main = 'cities',
+  Favorites = 'favorites'
+}
+
+export {SortOptions, CitiesListItems, AppRoute, AuthorizationStatus, Pages};

@@ -1,7 +1,7 @@
 import { offerType } from '../../types/offers';
 import SortingForm from '../../components/sorting-form/sorting-form';
 import Card from '../../components/card/card';
-import { SortOptions } from '../../const';
+import { Pages, SortOptions } from '../../const';
 import { useState } from 'react';
 import { Nullable } from 'vitest';
 
@@ -10,7 +10,7 @@ type cardsListProps = {
   offers: Array<offerType>;
 }
 
-export default function CardsList({placesCount, offers}:cardsListProps) : JSX.Element {
+export default function CardsList({ placesCount, offers }: cardsListProps): JSX.Element {
   const isSortingFormOpened = false;
   const [, setActiveOffer] = useState<Nullable<offerType>>(null);
   const handleCardHover = (offer: offerType | null) => {
@@ -23,13 +23,14 @@ export default function CardsList({placesCount, offers}:cardsListProps) : JSX.El
       <SortingForm
         items={Object.values(SortOptions)}
         currentItem={SortOptions.PRICE_ASCENDING}
-        isOpened= {isSortingFormOpened}
+        isOpened={isSortingFormOpened}
       />
       <div className="cities__places-list places__list tabs__content">
         {offers.map((offer) => (
           <Card
             key={offer.id}
             offer={offer}
+            page={Pages.Main}
             handler={handleCardHover}
           />
         ))}

@@ -28,7 +28,7 @@ export default function App({ placesCount, offers }: AppProps): JSX.Element {
             path={AppRoute.Favorites}
             element={
               <PrivateRoute authorizationStatus={getAuthorization()}>
-                <FavoritesPage />
+                <FavoritesPage offers={offers.filter((offer) => offer.isFavorite)} />
               </PrivateRoute>
             }
           />
@@ -38,7 +38,7 @@ export default function App({ placesCount, offers }: AppProps): JSX.Element {
           />
           <Route
             path={AppRoute.OfferId}
-            element={<OfferPage offers={offers}/>}
+            element={<OfferPage offers={offers} />}
           />
           <Route
             path='*'
