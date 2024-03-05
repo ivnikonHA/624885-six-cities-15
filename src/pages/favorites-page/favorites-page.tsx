@@ -1,8 +1,9 @@
 import { Helmet } from 'react-helmet-async';
+
+import FavoritesList from '../../components/favorites-list/favorites-list';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import { offerType } from '../../types/offers';
-import FavoritesList from '../../components/favorites-list/favorites-list';
 
 type favoritesPageProps = {
   offers: Array<offerType>;

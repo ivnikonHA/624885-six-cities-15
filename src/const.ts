@@ -31,4 +31,4 @@ const enum Pages {
   Favorites = 'favorites'
 }
 
-export {SortOptions, CitiesListItems, AppRoute, AuthorizationStatus, Pages};
+export {AppRoute, AuthorizationStatus, CitiesListItems, Pages,SortOptions};

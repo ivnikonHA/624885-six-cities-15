@@ -1,7 +1,8 @@
-import { Link, generatePath } from 'react-router-dom';
-import Stars from '../stars/stars';
+import { generatePath,Link } from 'react-router-dom';
+
 import { AppRoute } from '../../const';
 import { offerType } from '../../types/offers';
+import Stars from '../stars/stars';
 
 type CardProps = {
   offer: offerType;

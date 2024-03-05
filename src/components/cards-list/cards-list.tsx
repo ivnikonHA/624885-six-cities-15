@@ -1,9 +1,10 @@
-import { offerType } from '../../types/offers';
-import SortingForm from '../../components/sorting-form/sorting-form';
-import Card from '../../components/card/card';
-import { Pages, SortOptions } from '../../const';
 import { useState } from 'react';
 import { Nullable } from 'vitest';
+
+import Card from '../../components/card/card';
+import SortingForm from '../../components/sorting-form/sorting-form';
+import { Pages, SortOptions } from '../../const';
+import { offerType } from '../../types/offers';
 
 type cardsListProps = {
   placesCount: number;

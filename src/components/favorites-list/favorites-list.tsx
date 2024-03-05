@@ -1,6 +1,6 @@
+import Card from '../../components/card/card';
 import { CitiesListItems, Pages } from '../../const';
 import { offerType } from '../../types/offers';
-import Card from '../../components/card/card';
 
 type favoritesListProps = {
   offers: Array<offerType>;

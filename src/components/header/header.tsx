@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+
 import { AppRoute, AuthorizationStatus } from '../../const';
 import getAuthorization from '../../mocks/authorization-mock';
 import Logo from '../logo/logo';

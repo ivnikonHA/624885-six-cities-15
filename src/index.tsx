@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
 import App from './components/app/app';
-import { getRandomNumber } from './utils';
 import { getMockOffers } from './mocks/offers-mock';
+import { getRandomNumber } from './utils';
 
 const placesCount = getRandomNumber(1,999);
 const mockOffers = getMockOffers();
