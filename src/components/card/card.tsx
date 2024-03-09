@@ -1,25 +1,38 @@
-import { Link } from 'react-router-dom';
-import Stars from '../stars/stars';
+import { generatePath, Link } from 'react-router-dom';
+
 import { AppRoute } from '../../const';
+import { OfferType } from '../../types/offers';
+import Stars from '../stars/stars';
 
 type CardProps = {
-  title: string;
-  type: string;
-  price: number;
-  isFavorite: boolean;
-  isPremium: boolean;
-  previewImage: string;
-  rating: number;
+  offer: OfferType;
+  page: string;
+  handler?: (offer: OfferType | null) => void;
 }
 
-export default function Card({title, type, price, isFavorite, isPremium, previewImage, rating }: CardProps) : JSX.Element {
+export default function Card({ offer, page, handler }: CardProps): JSX.Element {
+  const { title, type, price, isFavorite, isPremium, previewImage, rating } = offer;
+  const handlerCardMouseEnter = () => {
+    if (handler) {
+      return handler(offer);
+    }
+  };
+  const handlerCardMouseLeave = () => {
+    if (handler) {
+      return handler(null);
+    }
+  };
   return (
-    <article className="cities__card place-card">
+    <article
+      className={`${page}__card place-card`}
+      onMouseEnter={handlerCardMouseEnter}
+      onMouseLeave={handlerCardMouseLeave}
+    >
       {isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
         </div>}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${page}__image-wrapper place-card__image-wrapper`}>
         <a href="#">
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
         </a>
@@ -42,9 +55,9 @@ export default function Card({title, type, price, isFavorite, isPremium, preview
             <span className="visually-hidden">To bookmarks</span>
           </button>
         </div>
-        <Stars rating = {rating} />
+        <Stars rating={rating} />
         <h2 className="place-card__name">
-          <Link to={AppRoute.Offer}>{title}</Link>
+          <Link to={generatePath(AppRoute.OfferId, { id: offer.id })}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
