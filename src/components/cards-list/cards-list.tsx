@@ -4,17 +4,17 @@ import { Nullable } from 'vitest';
 import Card from '../../components/card/card';
 import SortingForm from '../../components/sorting-form/sorting-form';
 import { Pages, SortOptions } from '../../const';
-import { offerType } from '../../types/offers';
+import { OfferType } from '../../types/offers';
 
-type cardsListProps = {
+type CardsListProps = {
   placesCount: number;
-  offers: Array<offerType>;
+  offers: Array<OfferType>;
 }
 
-export default function CardsList({ placesCount, offers }: cardsListProps): JSX.Element {
+export default function CardsList({ placesCount, offers }: CardsListProps): JSX.Element {
   const isSortingFormOpened = false;
-  const [, setActiveOffer] = useState<Nullable<offerType>>(null);
-  const handleCardHover = (offer: offerType | null) => {
+  const [, setActiveOffer] = useState<Nullable<OfferType>>(null);
+  const handleCardHover = (offer: OfferType | null) => {
     setActiveOffer(offer);
   };
   return (

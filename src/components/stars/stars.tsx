@@ -1,8 +1,8 @@
-type starsProps = {
+type StarsProps = {
   rating: number;
 }
 
-export default function Stars({rating} : starsProps) : JSX.Element {
+export default function Stars({ rating }: StarsProps): JSX.Element {
   const starsRating = {
     width: `${Math.round(rating) * 20}%`
   };

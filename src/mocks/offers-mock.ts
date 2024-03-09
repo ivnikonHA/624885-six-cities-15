@@ -1,6 +1,6 @@
-import { offerType } from '../types/offers';
+import { OfferType } from '../types/offers';
 
-const mockOfferArray: offerType[] = [
+const mockOfferArray: OfferType[] = [
   {
     id: '6c78ef29-5920-4416-8212-3692a57b0b21',
     title: 'The Pondhouse - A Magical Place',
@@ -118,7 +118,7 @@ const mockOfferArray: offerType[] = [
   }
 ];
 
-function getMockOffers() : Array<offerType> {
+function getMockOffers() : Array<OfferType> {
   return mockOfferArray;
 }
 

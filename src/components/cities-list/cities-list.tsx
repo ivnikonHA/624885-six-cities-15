@@ -1,9 +1,9 @@
-type citiesListProps = {
+type CitiesListProps = {
   items: string[];
   currentItem: string;
 }
 
-export default function CitiesList({items, currentItem} : citiesListProps) : JSX.Element {
+export default function CitiesList({ items, currentItem }: CitiesListProps): JSX.Element {
   return (
     <ul className="locations__list tabs__list">
       {items.map((item) => (

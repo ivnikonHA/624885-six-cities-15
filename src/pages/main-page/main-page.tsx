@@ -4,15 +4,15 @@ import CardsList from '../../components/cards-list/cards-list';
 import CitiesList from '../../components/cities-list/cities-list';
 import Header from '../../components/header/header';
 import { CitiesListItems } from '../../const';
-import { offerType } from '../../types/offers';
+import { OfferType } from '../../types/offers';
 
 
 type MainPageProps = {
   placesCount: number;
-  offers: Array<offerType>;
+  offers: Array<OfferType>;
 }
 
-export default function MainPage({placesCount, offers}:MainPageProps) : JSX.Element {
+export default function MainPage({ placesCount, offers }: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Helmet>

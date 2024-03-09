@@ -1,13 +1,13 @@
-import { generatePath,Link } from 'react-router-dom';
+import { generatePath, Link } from 'react-router-dom';
 
 import { AppRoute } from '../../const';
-import { offerType } from '../../types/offers';
+import { OfferType } from '../../types/offers';
 import Stars from '../stars/stars';
 
 type CardProps = {
-  offer: offerType;
+  offer: OfferType;
   page: string;
-  handler?: (offer: offerType | null) => void;
+  handler?: (offer: OfferType | null) => void;
 }
 
 export default function Card({ offer, page, handler }: CardProps): JSX.Element {

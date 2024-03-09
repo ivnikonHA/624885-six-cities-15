@@ -9,12 +9,12 @@ import LoginPage from '../../pages/login-page/login-page';
 import MainPage from '../../pages/main-page/main-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import OfferPage from '../../pages/offer-page/offer-page';
-import { offerType } from '../../types/offers';
+import { OfferType } from '../../types/offers';
 import PrivateRoute from '../private-route/private-route';
 
 type AppProps = {
   placesCount: number;
-  offers: Array<offerType>;
+  offers: Array<OfferType>;
 }
 
 export default function App({ placesCount, offers }: AppProps): JSX.Element {

@@ -3,13 +3,13 @@ import { Helmet } from 'react-helmet-async';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
-import { offerType } from '../../types/offers';
+import { OfferType } from '../../types/offers';
 
-type favoritesPageProps = {
-  offers: Array<offerType>;
+type FavoritesPageProps = {
+  offers: Array<OfferType>;
 }
 
-export default function FavoritesPage({ offers }: favoritesPageProps): JSX.Element {
+export default function FavoritesPage({ offers }: FavoritesPageProps): JSX.Element {
   return (
     <div className="page">
       <Helmet>

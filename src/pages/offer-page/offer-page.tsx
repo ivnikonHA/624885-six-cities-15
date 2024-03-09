@@ -5,17 +5,17 @@ import Header from '../../components/header/header';
 import ReviewForm from '../../components/review-form/review-form';
 import { AuthorizationStatus } from '../../const';
 import getAuthorization from '../../mocks/authorization-mock';
-import { offerType } from '../../types/offers';
+import { OfferType } from '../../types/offers';
 import NotFoundPage from '../not-found-page/not-found-page';
 
-type offerPageProps = {
-  offers: Array<offerType>;
+type OfferPageProps = {
+  offers: Array<OfferType>;
 }
 
-export default function OfferPage({ offers }: offerPageProps): JSX.Element {
+export default function OfferPage({ offers }: OfferPageProps): JSX.Element {
   const isAuthorized = getAuthorization() === AuthorizationStatus.Auth;
   const { id } = useParams();
-  const currentOffer = offers.find((offer: offerType) => (offer.id === id));
+  const currentOffer = offers.find((offer: OfferType) => (offer.id === id));
   if (!currentOffer) {
     return <NotFoundPage />;
   }

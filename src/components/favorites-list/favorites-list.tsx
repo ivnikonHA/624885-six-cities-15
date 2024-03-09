@@ -1,12 +1,12 @@
 import Card from '../../components/card/card';
 import { CitiesListItems, Pages } from '../../const';
-import { offerType } from '../../types/offers';
+import { OfferType } from '../../types/offers';
 
-type favoritesListProps = {
-  offers: Array<offerType>;
+type FavoritesListProps = {
+  offers: Array<OfferType>;
 }
 
-function CitiesList({ offers }: favoritesListProps) {
+function CitiesList({ offers }: FavoritesListProps) {
   return (
     <>
       {offers.map((offer) => (
@@ -20,12 +20,12 @@ function CitiesList({ offers }: favoritesListProps) {
   );
 }
 
-type favoritesListItemProps = {
-  offers: Array<offerType>;
+type FavoritesListItemProps = {
+  offers: Array<OfferType>;
   currentCity: string;
 }
 
-function FavoritesListItem({ offers, currentCity }: favoritesListItemProps) {
+function FavoritesListItem({ offers, currentCity }: FavoritesListItemProps) {
   if (offers.length === 0) {
     return '';
   }
@@ -44,7 +44,7 @@ function FavoritesListItem({ offers, currentCity }: favoritesListItemProps) {
     </li>);
 }
 
-export default function FavoritesList({ offers }: favoritesListProps): JSX.Element {
+export default function FavoritesList({ offers }: FavoritesListProps): JSX.Element {
   return (
     <>
       {Object.values(CitiesListItems).map((city) => (
