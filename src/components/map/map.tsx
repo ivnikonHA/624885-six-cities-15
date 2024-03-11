@@ -16,5 +16,17 @@ export default function Map({ city, offers, selectedOffer }: MapProps): JSX.Elem
   const mapRef = useRef(null);
   const map = useMap(city, mapRef);
 
+  useEffect(() => {
+    if (map) {
+      const markerLayer = leaflet.layerGroup().addTo(map);
+      offers.forEach((offer): void => {
+        leaflet.marker({
+          lat: offer.location.latitude,
+          lng: offer.location.longitude
+        }).addTo(markerLayer);
+      });
+    }
+  });
+
   return <section className="cities__map map" ref={mapRef}></section>;
 }
