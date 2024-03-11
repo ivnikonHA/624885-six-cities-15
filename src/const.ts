@@ -31,4 +31,7 @@ const enum Pages {
   Favorites = 'favorites'
 }
 
-export {AppRoute, AuthorizationStatus, CitiesListItems, Pages,SortOptions};
+const URL_MARKER_DEFAULT = './img/pin.svg';
+const URL_MARKER_CURRENT = './img/pin-active.svg';
+
+export {AppRoute, AuthorizationStatus, CitiesListItems, Pages,SortOptions, URL_MARKER_CURRENT, URL_MARKER_DEFAULT};

@@ -31,7 +31,7 @@ export default function MainPage({ placesCount, offers }: MainPageProps): JSX.El
           <div className="cities__places-container container">
             <CardsList placesCount={placesCount} offers={offers} />
             <div className="cities__right-section">
-              <Map city={offers[0].city} offers={offers} selectedOffer={undefined} />
+              <Map city={offers[0].city} offers={offers} selectedOffer={offers[0]} />
             </div>
           </div>
         </div>
