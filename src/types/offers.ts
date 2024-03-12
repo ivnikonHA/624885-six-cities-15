@@ -22,4 +22,4 @@ type LocationType = {
   zoom: number;
 };
 
-export type {OfferType};
+export type {CityType,OfferType};
