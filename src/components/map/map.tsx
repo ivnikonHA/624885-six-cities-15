@@ -11,6 +11,7 @@ type MapProps = {
   city: CityType;
   offers: OfferType[];
   selectedOffer: OfferType | undefined;
+  page: string;
 };
 
 const defaultCustomIcon = new leaflet.Icon({
@@ -25,7 +26,7 @@ const currentCustomIcon = new leaflet.Icon({
   iconAnchor: [20, 40]
 });
 
-export default function Map({ city, offers, selectedOffer }: MapProps): JSX.Element {
+export default function Map({ city, offers, selectedOffer, page }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(city, mapRef);
 
@@ -45,5 +46,5 @@ export default function Map({ city, offers, selectedOffer }: MapProps): JSX.Elem
     }
   });
 
-  return <section className="cities__map map" ref={mapRef}></section>;
+  return <section className={`${page}__map map`} ref={mapRef}></section>;
 }

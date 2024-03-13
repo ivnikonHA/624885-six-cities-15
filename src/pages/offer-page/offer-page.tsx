@@ -2,11 +2,13 @@ import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 
 import Header from '../../components/header/header';
+import Map from '../../components/map/map';
 import ReviewForm from '../../components/review-form/review-form';
 import ReviewsItems from '../../components/reviews-items/reviews-items';
 import { AuthorizationStatus } from '../../const';
 import getAuthorization from '../../mocks/authorization-mock';
 import { COMMENTS } from '../../mocks/comments-mock';
+import { mockNearbyArray } from '../../mocks/nearby-mock';
 import { OfferType } from '../../types/offers';
 import NotFoundPage from '../not-found-page/not-found-page';
 
@@ -156,7 +158,12 @@ export default function OfferPage({ offers }: OfferPageProps): JSX.Element {
               </section>
             </div>
           </div>
-          <section className="offer__map map"></section>
+          <Map
+            city={mockNearbyArray[0].city}
+            offers={mockNearbyArray}
+            selectedOffer={undefined}
+            page='offer'
+          />
         </section>
         <div className="container">
           <section className="near-places places">
