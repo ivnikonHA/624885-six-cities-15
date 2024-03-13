@@ -17,6 +17,7 @@ export default function useMap(city: CityType, mapRef: MutableRefObject<HTMLElem
           lat: city.location.latitude,
           lng: city.location.longitude
         },
+        scrollWheelZoom: false,
         zoom: city.location.zoom
       });
       const layer = new leaflet.TileLayer(
