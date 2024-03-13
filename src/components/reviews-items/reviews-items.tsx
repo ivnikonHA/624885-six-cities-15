@@ -1,5 +1,7 @@
-import { CommentType } from '../../types/comments';
 import dayjs from 'dayjs';
+
+import { CommentType } from '../../types/comments';
+import Stars from '../stars/stars';
 
 type ReviewsItemsProps = {
   comments: CommentType[];
@@ -25,12 +27,7 @@ export default function ReviewsItems({ comments }: ReviewsItemsProps): JSX.Eleme
             </span>
           </div>
           <div className="reviews__info">
-            <div className="reviews__rating rating">
-              <div className="reviews__stars rating__stars">
-                <span style={{ width: '80%' }}></span>
-                <span className="visually-hidden">Rating</span>
-              </div>
-            </div>
+            <Stars rating={comment.rating} page='reviews' />
             <p className="reviews__text">
               {comment.comment}
             </p>
