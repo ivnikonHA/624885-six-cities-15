@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 
+import { CITIES } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { changeCurrentCity } from '../../store/action';
@@ -17,11 +18,11 @@ export default function CitiesList({ items }: CitiesListProps): JSX.Element {
         <li key={item} className="locations__item">
           <a
             className={classNames('locations__item-link', 'tabs__item',
-              { 'tabs__item--active': item === currentCity })}
+              { 'tabs__item--active': item === currentCity.name })}
             href="#"
             onClick={(evt) => {
               evt.preventDefault();
-              dispatch(changeCurrentCity({ city: item }));
+              dispatch(changeCurrentCity({ city: CITIES.find((city) => city.name === item) || CITIES[0] }));
             }}
           >
             <span>{item}</span>

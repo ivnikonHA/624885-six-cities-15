@@ -1,3 +1,5 @@
+import { CityType } from './types/offers';
+
 const SortOptions = {
   POPULAR: 'Popular',
   PRICE_ASCENDING: 'Price: low to high',
@@ -12,7 +14,58 @@ const CitiesListItems = {
   AMSTERDAM: 'Amsterdam',
   HAMBURG: 'Hamburg',
   DUSSELDORF: 'Dusseldorf'
-};
+} as const;
+
+const CITIES: CityType[] = [
+  {
+    name: CitiesListItems.PARIS,
+    location: {
+      latitude: 48.85661,
+      longitude: 2.351499,
+      zoom: 13
+    }
+  },
+  {
+    name: CitiesListItems.COLOGNE,
+    location: {
+      latitude: 50.938361,
+      longitude: 6.959974,
+      zoom: 13
+    }
+  },
+  {
+    name: CitiesListItems.BRUSSELS,
+    location: {
+      latitude: 50.846557,
+      longitude: 4.351697,
+      zoom: 13
+    }
+  },
+  {
+    name: CitiesListItems.AMSTERDAM,
+    location: {
+      latitude: 52.37454,
+      longitude: 4.897976,
+      zoom: 13
+    }
+  },
+  {
+    name: CitiesListItems.HAMBURG,
+    location: {
+      latitude: 53.550341,
+      longitude: 10.000654,
+      zoom: 13
+    }
+  },
+  {
+    name: CitiesListItems.DUSSELDORF,
+    location: {
+      latitude: 51.225402,
+      longitude: 6.776314,
+      zoom: 13
+    }
+  }
+];
 
 const enum AppRoute {
   Root = '/',
@@ -35,4 +88,4 @@ const enum Pages {
 const URL_MARKER_DEFAULT = './img/pin.svg';
 const URL_MARKER_CURRENT = './img/pin-active.svg';
 
-export {AppRoute, AuthorizationStatus, CitiesListItems, Pages,SortOptions, URL_MARKER_CURRENT, URL_MARKER_DEFAULT};
+export {AppRoute, AuthorizationStatus,CITIES, CitiesListItems, Pages,SortOptions, URL_MARKER_CURRENT, URL_MARKER_DEFAULT};

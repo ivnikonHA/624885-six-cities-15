@@ -9,7 +9,8 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 
 export default function MainPage(): JSX.Element {
   const currentCity = useAppSelector((state) => state.currentCity);
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector((state) => state.offers)
+    .filter((offer) => offer.city.name === currentCity.name);
   const placesCount = offers.length;
   return (
     <div className="page page--gray page--main">
@@ -26,10 +27,14 @@ export default function MainPage(): JSX.Element {
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <CardsSection placesCount={placesCount} offers={offers} currentCity={currentCity} />
+            <CardsSection
+              placesCount={placesCount}
+              offers={offers}
+              currentCity={currentCity.name}
+            />
             <div className="cities__right-section">
               <Map
-                city={offers[0].city}
+                city={currentCity}
                 offers={offers}
                 selectedOffer={offers[0]}
                 page='cities'

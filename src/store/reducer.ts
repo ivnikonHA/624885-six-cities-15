@@ -1,12 +1,13 @@
 import { createReducer } from '@reduxjs/toolkit';
 
-import { CitiesListItems } from '../const';
+import { CITIES } from '../const';
 import { getMockOffers } from '../mocks/offers-mock';
 import { changeCurrentCity } from './action';
 
+const mockOffers = getMockOffers();
 const initialState = {
-  currentCity: CitiesListItems.PARIS,
-  offers: getMockOffers()
+  currentCity: CITIES[0],
+  offers: mockOffers
 };
 
 const reducer = createReducer(initialState, (builder) => {
