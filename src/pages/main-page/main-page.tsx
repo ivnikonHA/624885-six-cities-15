@@ -12,6 +12,7 @@ export default function MainPage(): JSX.Element {
   const offers = useAppSelector((state) => state.offers)
     .filter((offer) => offer.city.name === currentCity.name);
   const placesCount = offers.length;
+  const activeOffer = useAppSelector((state) => state.activeOffer);
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -36,7 +37,7 @@ export default function MainPage(): JSX.Element {
               <Map
                 city={currentCity}
                 offers={offers}
-                selectedOffer={offers[0]}
+                selectedOffer={activeOffer}
                 page='cities'
               />
             </div>

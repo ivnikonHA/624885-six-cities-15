@@ -1,7 +1,6 @@
-import { useState } from 'react';
-import { Nullable } from 'vitest';
-
 import { Pages, SortOptions } from '../../const';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { activeOffer } from '../../store/action';
 import { OfferType } from '../../types/offers';
 import CardsList from '../cards-list/cards-list';
 import SortingForm from '../sorting-form/sorting-form';
@@ -14,9 +13,10 @@ type CardsSectionProps = {
 
 export default function CardsSection({ placesCount, offers, currentCity }: CardsSectionProps): JSX.Element {
   const isSortingFormOpened = false;
-  const [, setActiveOffer] = useState<Nullable<OfferType>>(null);
+  //const [, setActiveOffer] = useState<Nullable<OfferType>>(null);
+  const dispatch = useAppDispatch();
   const handleCardHover = (offer: OfferType | null) => {
-    setActiveOffer(offer);
+    dispatch(activeOffer({ offerId: offer?.id }));
   };
   return (
     <section className="cities__places places">

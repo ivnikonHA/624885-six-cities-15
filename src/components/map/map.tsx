@@ -10,7 +10,7 @@ import { CityType, OfferType } from '../../types/offers';
 type MapProps = {
   city: CityType;
   offers: OfferType[];
-  selectedOffer: OfferType | undefined;
+  selectedOffer: string | undefined;
   page: string;
 };
 
@@ -41,7 +41,6 @@ export default function Map({ city, offers, selectedOffer, page }: MapProps): JS
 
   useEffect(() => {
     if (map) {
-      //markerLayer = leaflet.layerGroup().addTo(map);
       offers.forEach((offer): void => {
         leaflet.marker(
           {
@@ -49,7 +48,7 @@ export default function Map({ city, offers, selectedOffer, page }: MapProps): JS
             lng: offer.location.longitude
           }
         )
-          .setIcon(offer.id === selectedOffer?.id ? currentCustomIcon : defaultCustomIcon)
+          .setIcon(offer.id === selectedOffer ? currentCustomIcon : defaultCustomIcon)
           .addTo(markerLayer.current);
       });
     }
