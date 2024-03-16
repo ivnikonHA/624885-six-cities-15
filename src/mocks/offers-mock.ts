@@ -1,24 +1,8 @@
-import { CityType, OfferType } from '../types/offers';
+import { CITIES } from '../const';
+import { OfferType } from '../types/offers';
+import { mockData } from './raw-offers';
 
-const CITIES: CityType[] = [
-  {
-    name: 'Amsterdam',
-    location: {
-      latitude: 52.37454,
-      longitude: 4.897976,
-      zoom: 13
-    }
-  },
-  {
-    name: 'Cologne',
-    location: {
-      latitude: 50.938361,
-      longitude: 6.959974,
-      zoom: 13
-    }
-  }
-];
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const mockOfferArray: OfferType[] = [
   {
     id: '6c78ef29-5920-4416-8212-3692a57b0b21',
@@ -87,7 +71,8 @@ const mockOfferArray: OfferType[] = [
 ];
 
 function getMockOffers() : Array<OfferType> {
-  return mockOfferArray;
+  const data = mockData;
+  return data as OfferType[];
 }
 
 export {getMockOffers};
