@@ -13,11 +13,10 @@ import { OfferType } from '../../types/offers';
 import PrivateRoute from '../private-route/private-route';
 
 type AppProps = {
-  placesCount: number;
   offers: Array<OfferType>;
 }
 
-export default function App({ placesCount, offers }: AppProps): JSX.Element {
+export default function App({ offers }: AppProps): JSX.Element {
   const favoriteOffers = useMemo(
     () => offers.filter((offer) => offer.isFavorite),
     [offers]);
@@ -27,7 +26,7 @@ export default function App({ placesCount, offers }: AppProps): JSX.Element {
         <Routes>
           <Route
             path={AppRoute.Root}
-            element={<MainPage placesCount={placesCount} offers={offers}></MainPage>}
+            element={<MainPage />}
           />
           <Route
             path={AppRoute.Favorites}

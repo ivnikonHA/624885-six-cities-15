@@ -9,9 +9,10 @@ import SortingForm from '../sorting-form/sorting-form';
 type CardsSectionProps = {
   placesCount: number;
   offers: Array<OfferType>;
+  currentCity: string;
 }
 
-export default function CardsSection({ placesCount, offers }: CardsSectionProps): JSX.Element {
+export default function CardsSection({ placesCount, offers, currentCity }: CardsSectionProps): JSX.Element {
   const isSortingFormOpened = false;
   const [, setActiveOffer] = useState<Nullable<OfferType>>(null);
   const handleCardHover = (offer: OfferType | null) => {
@@ -20,7 +21,7 @@ export default function CardsSection({ placesCount, offers }: CardsSectionProps)
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
-      <b className="places__found">{placesCount} places to stay in Amsterdam</b>
+      <b className="places__found">{placesCount} places to stay in {currentCity}</b>
       <SortingForm
         items={Object.values(SortOptions)}
         currentItem={SortOptions.PRICE_ASCENDING}
