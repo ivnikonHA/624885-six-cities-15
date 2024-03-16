@@ -55,7 +55,7 @@ export default function Card({ offer, page, handler }: CardProps): JSX.Element {
             <span className="visually-hidden">To bookmarks</span>
           </button>
         </div>
-        <Stars rating={rating} />
+        <Stars rating={rating} page={'place-card'} />
         <h2 className="place-card__name">
           <Link to={generatePath(AppRoute.OfferId, { id: offer.id })}>{title}</Link>
         </h2>

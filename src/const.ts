@@ -28,7 +28,8 @@ const enum AuthorizationStatus {
 
 const enum Pages {
   Main = 'cities',
-  Favorites = 'favorites'
+  Favorites = 'favorites',
+  Offer = 'near-places'
 }
 
 const URL_MARKER_DEFAULT = './img/pin.svg';

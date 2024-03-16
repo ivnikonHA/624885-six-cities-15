@@ -1,23 +1,9 @@
-import Card from '../../components/card/card';
 import { CitiesListItems, Pages } from '../../const';
 import { OfferType } from '../../types/offers';
+import CardsList from '../cards-list/cards-list';
 
 type FavoritesListProps = {
   offers: Array<OfferType>;
-}
-
-function CitiesList({ offers }: FavoritesListProps) {
-  return (
-    <>
-      {offers.map((offer) => (
-        <Card
-          key={offer.id}
-          offer={offer}
-          page={Pages.Main}
-        />
-      ))}
-    </>
-  );
 }
 
 type FavoritesListItemProps = {
@@ -39,7 +25,7 @@ function FavoritesListItem({ offers, currentCity }: FavoritesListItemProps) {
         </div>
       </div>
       <div className="favorites__places">
-        <CitiesList offers={offers} />
+        <CardsList offers={offers} page={Pages.Favorites} />
       </div>
     </li>);
 }
