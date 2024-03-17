@@ -2,10 +2,16 @@ import { createReducer } from '@reduxjs/toolkit';
 
 import { CITIES } from '../const';
 import { getMockOffers } from '../mocks/offers-mock';
+import { CityType, OfferType } from '../types/offers';
 import { activeOffer, changeCurrentCity } from './action';
 
 const mockOffers = getMockOffers();
-const initialState = {
+type initialStateType = {
+  currentCity: CityType;
+  offers: OfferType[];
+  activeOffer: string | undefined;
+}
+const initialState: initialStateType = {
   currentCity: CITIES[0],
   offers: mockOffers,
   activeOffer: undefined
