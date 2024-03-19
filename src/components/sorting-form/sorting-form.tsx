@@ -2,12 +2,16 @@ import { useState } from 'react';
 
 import SortList from '../../components/sort-list/sort-list';
 import { SortOptions } from '../../const';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { changeSortType } from '../../store/action';
 
 export default function SortingForm() {
   const [isOpened, setIsOpened] = useState(false);
   const [currentItem, setCurrentItem] = useState(SortOptions.POPULAR);
+  const dispatch = useAppDispatch();
   const sortClickHandler = (item: string) => {
     setCurrentItem(item);
+    dispatch(changeSortType({ sortType: item }));
     setIsOpened(false);
   };
   return (
@@ -19,7 +23,7 @@ export default function SortingForm() {
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <SortList items={Object.values(SortOptions)} currentItem={currentItem} opened={isOpened} handler={sortClickHandler}/>
+      <SortList items={Object.values(SortOptions)} currentItem={currentItem} opened={isOpened} handler={sortClickHandler} />
     </form>
   );
 }
