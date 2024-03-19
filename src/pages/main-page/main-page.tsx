@@ -13,17 +13,19 @@ export default function MainPage(): JSX.Element {
     .filter((offer) => offer.city.name === currentCity.name);
   const placesCount = offers.length;
   const activeOffer = useAppSelector((state) => state.activeOffer);
+  const citiesNamesList = Object.values(CitiesListItems);
+
   return (
     <div className="page page--gray page--main">
       <Helmet>
         <title>6 Cities</title>
       </Helmet>
-      <Header></Header>
+      <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CitiesList items={Object.values(CitiesListItems)} />
+            <CitiesList items={citiesNamesList} />
           </section>
         </div>
         <div className="cities">
