@@ -1,7 +1,6 @@
-import { useState } from 'react';
-import { Nullable } from 'vitest';
-
 import { Pages, SortOptions } from '../../const';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { activeOffer } from '../../store/action';
 import { OfferType } from '../../types/offers';
 import CardsList from '../cards-list/cards-list';
 import SortingForm from '../sorting-form/sorting-form';
@@ -9,18 +8,20 @@ import SortingForm from '../sorting-form/sorting-form';
 type CardsSectionProps = {
   placesCount: number;
   offers: Array<OfferType>;
+  currentCity: string;
 }
 
-export default function CardsSection({ placesCount, offers }: CardsSectionProps): JSX.Element {
+export default function CardsSection({ placesCount, offers, currentCity }: CardsSectionProps): JSX.Element {
   const isSortingFormOpened = false;
-  const [, setActiveOffer] = useState<Nullable<OfferType>>(null);
+  //const [, setActiveOffer] = useState<Nullable<OfferType>>(null);
+  const dispatch = useAppDispatch();
   const handleCardHover = (offer: OfferType | null) => {
-    setActiveOffer(offer);
+    dispatch(activeOffer({ offerId: offer?.id }));
   };
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
-      <b className="places__found">{placesCount} places to stay in Amsterdam</b>
+      <b className="places__found">{placesCount} places to stay in {currentCity}</b>
       <SortingForm
         items={Object.values(SortOptions)}
         currentItem={SortOptions.PRICE_ASCENDING}

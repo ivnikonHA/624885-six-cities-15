@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 
 import App from './components/app/app';
 import { getMockOffers } from './mocks/offers-mock';
-import { getRandomNumber } from './utils';
+import { store } from './store';
 
-const placesCount = getRandomNumber(1,999);
 const mockOffers = getMockOffers();
 
 const root = ReactDOM.createRoot(
@@ -14,6 +14,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App placesCount={placesCount} offers={mockOffers}></App>
+    <Provider store={store}>
+      <App offers={mockOffers}></App>
+    </Provider>
   </React.StrictMode>
 );

@@ -1,6 +1,6 @@
 import 'leaflet/dist/leaflet.css';
 
-import leaflet from 'leaflet';
+import leaflet, { LayerGroup } from 'leaflet';
 import { useEffect, useRef } from 'react';
 
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
@@ -10,7 +10,7 @@ import { CityType, OfferType } from '../../types/offers';
 type MapProps = {
   city: CityType;
   offers: OfferType[];
-  selectedOffer: OfferType | undefined;
+  selectedOffer: string | undefined;
   page: string;
 };
 
@@ -29,10 +29,18 @@ const currentCustomIcon = new leaflet.Icon({
 export default function Map({ city, offers, selectedOffer, page }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(city, mapRef);
+  const markerLayer = useRef<LayerGroup>(leaflet.layerGroup());
 
   useEffect(() => {
     if (map) {
-      const markerLayer = leaflet.layerGroup().addTo(map);
+      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
+      markerLayer.current.addTo(map);
+      markerLayer.current.clearLayers();
+    }
+  }, [city, map]);
+
+  useEffect(() => {
+    if (map) {
       offers.forEach((offer): void => {
         leaflet.marker(
           {
@@ -40,8 +48,8 @@ export default function Map({ city, offers, selectedOffer, page }: MapProps): JS
             lng: offer.location.longitude
           }
         )
-          .setIcon(offer.id === selectedOffer?.id ? currentCustomIcon : defaultCustomIcon)
-          .addTo(markerLayer);
+          .setIcon(offer.id === selectedOffer ? currentCustomIcon : defaultCustomIcon)
+          .addTo(markerLayer.current);
       });
     }
   });
