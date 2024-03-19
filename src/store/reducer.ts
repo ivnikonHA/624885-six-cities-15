@@ -2,17 +2,11 @@ import { createReducer } from '@reduxjs/toolkit';
 
 import { CITIES, SortOptions } from '../const';
 import { getMockOffers } from '../mocks/offers-mock';
-import { CityType, OfferType } from '../types/offers';
+import { InitialStateType } from '../types/state';
 import { activeOffer, changeCurrentCity, changeSortType } from './action';
 
 const mockOffers = getMockOffers();
-type initialStateType = {
-  currentCity: CityType;
-  offers: OfferType[];
-  activeOffer: string | undefined;
-  sortType: string;
-}
-const initialState: initialStateType = {
+const initialState: InitialStateType = {
   currentCity: CITIES[0],
   offers: mockOffers,
   activeOffer: undefined,

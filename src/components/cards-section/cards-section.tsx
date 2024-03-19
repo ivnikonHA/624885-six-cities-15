@@ -25,7 +25,7 @@ export default function CardsSection({ placesCount, offers, currentCity }: Cards
       <b className="places__found">{placesCount} places to stay in {currentCity}</b>
       <SortingForm />
       <div className="cities__places-list places__list tabs__content">
-        <CardsList offers={sorting[sortType](offers)} page={Pages.Main} handler={handleCardHover} />
+        <CardsList offers={sorting[sortType]([...offers])} page={Pages.Main} handler={handleCardHover} />
       </div>
     </section>
   );

@@ -20,10 +20,7 @@ export default function CitiesList({ items }: CitiesListProps): JSX.Element {
             className={classNames('locations__item-link', 'tabs__item',
               { 'tabs__item--active': item === currentCity.name })}
             href="#"
-            onClick={(evt) => {
-              evt.preventDefault();
-              dispatch(changeCurrentCity({ city: CITIES.find((city) => city.name === item) || CITIES[0] }));
-            }}
+            onClick={() => dispatch(changeCurrentCity({ city: CITIES.find((city) => city.name === item) || CITIES[0] }))}
           >
             <span>{item}</span>
           </a>
