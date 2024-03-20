@@ -1,3 +1,4 @@
+import { AuthorizationStatus } from '../const';
 import { store } from '../store';
 import { CityType, OfferType } from './offers';
 
@@ -9,4 +10,5 @@ export type InitialStateType = {
   offers: OfferType[];
   activeOffer?: string;
   sortType: string;
+  authorizationStatus: AuthorizationStatus;
 }
