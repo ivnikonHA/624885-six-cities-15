@@ -3,7 +3,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import { CITIES, SortOptions } from '../const';
 import { getMockOffers } from '../mocks/offers-mock';
 import { InitialStateType } from '../types/state';
-import { activeOffer, changeCurrentCity, changeSortType } from './action';
+import { activeOffer, changeCurrentCity, changeSortType, loadOffers } from './action';
 
 const mockOffers = getMockOffers();
 const initialState: InitialStateType = {
@@ -20,6 +20,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(activeOffer, (state, action) => {
       state.activeOffer = action.payload.offerId;
+    })
+    .addCase(loadOffers, (state, action) => {
+      state.offers = action.payload.offers;
     })
     .addCase(changeSortType, (state, action) => {
       state.sortType = action.payload.sortType;
