@@ -74,6 +74,12 @@ const enum AppRoute {
   OfferId = '/offer/:id'
 }
 
+const enum APIRoute {
+  Offers = '/offers',
+  Login = '/login',
+  Logout = '/logout'
+}
+
 const enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NOAUTH',
@@ -89,4 +95,4 @@ const enum Pages {
 const URL_MARKER_DEFAULT = './img/pin.svg';
 const URL_MARKER_CURRENT = './img/pin-active.svg';
 
-export { AppRoute, AuthorizationStatus, CITIES, CitiesListItems, Pages, SortOptions, URL_MARKER_CURRENT, URL_MARKER_DEFAULT };
+export { APIRoute, AppRoute, AuthorizationStatus, CITIES, CitiesListItems, Pages, SortOptions, URL_MARKER_CURRENT, URL_MARKER_DEFAULT };
