@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
@@ -6,6 +5,7 @@ import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import getAuthorization from '../../mocks/authorization-mock';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
+import LoadingPage from '../../pages/loading-page/loading-page';
 import LoginPage from '../../pages/login-page/login-page';
 import MainPage from '../../pages/main-page/main-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
@@ -14,10 +14,11 @@ import PrivateRoute from '../private-route/private-route';
 
 
 export default function App(): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
-  const favoriteOffers = useMemo(
-    () => offers.filter((offer) => offer.isFavorite),
-    [offers]);
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  if(isOffersDataLoading) {
+    return <LoadingPage />;
+  }
+
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -30,7 +31,7 @@ export default function App(): JSX.Element {
             path={AppRoute.Favorites}
             element={
               <PrivateRoute authorizationStatus={getAuthorization()}>
-                <FavoritesPage offers={favoriteOffers} />
+                <FavoritesPage />
               </PrivateRoute>
             }
           />
@@ -40,7 +41,7 @@ export default function App(): JSX.Element {
           />
           <Route
             path={AppRoute.OfferId}
-            element={<OfferPage offers={offers} />}
+            element={<OfferPage />}
           />
           <Route
             path='*'
@@ -50,4 +51,5 @@ export default function App(): JSX.Element {
       </BrowserRouter>
     </HelmetProvider>
   );
+
 }

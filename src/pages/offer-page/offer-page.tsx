@@ -7,17 +7,16 @@ import Map from '../../components/map/map';
 import ReviewForm from '../../components/review-form/review-form';
 import ReviewsItems from '../../components/reviews-items/reviews-items';
 import { AuthorizationStatus, Pages } from '../../const';
+import { useAppSelector } from '../../hooks/useAppSelector';
 import getAuthorization from '../../mocks/authorization-mock';
 import { COMMENTS } from '../../mocks/comments-mock';
 import { mockNearbyArray } from '../../mocks/nearby-mock';
 import { OfferType } from '../../types/offers';
 import NotFoundPage from '../not-found-page/not-found-page';
 
-type OfferPageProps = {
-  offers: Array<OfferType>;
-}
 
-export default function OfferPage({ offers }: OfferPageProps): JSX.Element {
+export default function OfferPage(): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
   const isAuthorized = getAuthorization() === AuthorizationStatus.Auth;
   const { id } = useParams();
   const currentOffer = offers.find((offer: OfferType) => (offer.id === id));
