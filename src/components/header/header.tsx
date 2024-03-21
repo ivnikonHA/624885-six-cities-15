@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 
 import { AppRoute, AuthorizationStatus } from '../../const';
-import getAuthorization from '../../mocks/authorization-mock';
+import { useAppSelector } from '../../hooks/useAppSelector';
 import Logo from '../logo/logo';
 
 export default function Header() : JSX.Element {
-  const isAuthorized = getAuthorization() === AuthorizationStatus.Auth;
+  const isAuthorized = useAppSelector((state) => state.authorizationStatus) === AuthorizationStatus.Auth;
   return (
     <header className="header">
       <div className="container">

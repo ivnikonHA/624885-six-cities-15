@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import getAuthorization from '../../mocks/authorization-mock';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import LoadingPage from '../../pages/loading-page/loading-page';
 import LoginPage from '../../pages/login-page/login-page';
@@ -12,8 +11,8 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import PrivateRoute from '../private-route/private-route';
 
-
 export default function App(): JSX.Element {
+  const isAuthorized = useAppSelector((state) => state.authorizationStatus);
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
   if(isOffersDataLoading) {
     return <LoadingPage />;
@@ -30,7 +29,7 @@ export default function App(): JSX.Element {
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute authorizationStatus={getAuthorization()}>
+              <PrivateRoute authorizationStatus={isAuthorized}>
                 <FavoritesPage />
               </PrivateRoute>
             }
