@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom';
 
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import { logoutAction } from '../../store/api-actions';
 import Logo from '../logo/logo';
 
-export default function Header() : JSX.Element {
+export default function Header(): JSX.Element {
   const isAuthorized = useAppSelector((state) => state.authorizationStatus) === AuthorizationStatus.Auth;
+  const dispatch = useAppDispatch();
   return (
     <header className="header">
       <div className="container">
@@ -28,14 +31,21 @@ export default function Header() : JSX.Element {
                       <span className="header__favorite-count">3</span>
 
                     </>)
-                    : <span className="header__login">Sign in</span> }
+                    : <span className="header__login">Sign in</span>}
                 </Link>
               </li>
               {isAuthorized &&
                 <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
+                  <Link
+                    onClick={(evt) => {
+                      evt.preventDefault();
+                      dispatch(logoutAction());
+                    }}
+                    className="header__nav-link"
+                    to={AppRoute.Login}
+                  >
                     <span className="header__signout">Sign out</span>
-                  </a>
+                  </Link>
                 </li>}
             </ul>
           </nav>
