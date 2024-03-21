@@ -11,4 +11,5 @@ export type InitialStateType = {
   activeOffer?: string;
   sortType: string;
   authorizationStatus: AuthorizationStatus;
+  isOffersDataLoading: boolean;
 }

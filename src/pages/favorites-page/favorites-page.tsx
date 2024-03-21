@@ -3,13 +3,10 @@ import { Helmet } from 'react-helmet-async';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
-import { OfferType } from '../../types/offers';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
-type FavoritesPageProps = {
-  offers: Array<OfferType>;
-}
-
-export default function FavoritesPage({ offers }: FavoritesPageProps): JSX.Element {
+export default function FavoritesPage(): JSX.Element {
+  const offers = useAppSelector((state) => state.offers).filter((offer) => offer.isFavorite);
   return (
     <div className="page">
       <Helmet>

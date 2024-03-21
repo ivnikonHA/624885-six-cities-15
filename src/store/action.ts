@@ -8,5 +8,6 @@ const loadOffers = createAction<{ offers: OfferType[] }>('loadOffers');
 const activeOffer = createAction<{ offerId: string | undefined }>('activeOffer');
 const changeSortType = createAction<{ sortType: string }>('changeSortType');
 const requireAuthorization = createAction<AuthorizationStatus>('requireAuthorization');
+const setLoadingOffersStatus = createAction<boolean>('setLoadingOffersStatus');
 
-export { activeOffer, changeCurrentCity, changeSortType, loadOffers, requireAuthorization };
+export { activeOffer, changeCurrentCity, changeSortType, loadOffers, requireAuthorization, setLoadingOffersStatus };

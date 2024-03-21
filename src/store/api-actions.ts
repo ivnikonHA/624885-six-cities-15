@@ -7,7 +7,7 @@ import { AuthData } from '../types/auth-data';
 import { OfferType } from '../types/offers';
 import { AppDispatch } from '../types/state';
 import { UserData } from '../types/user-data';
-import { loadOffers, requireAuthorization } from './action';
+import { loadOffers, requireAuthorization, setLoadingOffersStatus } from './action';
 
 type ApiThunkConfigObject = {
   dispatch: AppDispatch;
@@ -17,7 +17,9 @@ type ApiThunkConfigObject = {
 const fetchOffersAction = createAsyncThunk<void, undefined, ApiThunkConfigObject>(
   'fetchOffers',
   async (_arg, { dispatch, extra: api }) => {
+    dispatch(setLoadingOffersStatus(true));
     const { data } = await api.get<OfferType[]>(APIRoute.Offers);
+    dispatch(setLoadingOffersStatus(false));
     dispatch(loadOffers({ offers: data }));
   }
 );

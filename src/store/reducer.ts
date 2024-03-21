@@ -2,14 +2,15 @@ import { createReducer } from '@reduxjs/toolkit';
 
 import { AuthorizationStatus, CITIES, SortOptions } from '../const';
 import { InitialStateType } from '../types/state';
-import { activeOffer, changeCurrentCity, changeSortType, loadOffers, requireAuthorization } from './action';
+import { activeOffer, changeCurrentCity, changeSortType, loadOffers, requireAuthorization, setLoadingOffersStatus } from './action';
 
 const initialState: InitialStateType = {
   currentCity: CITIES[0],
   offers: [],
   activeOffer: undefined,
   sortType: SortOptions.POPULAR,
-  authorizationStatus: AuthorizationStatus.Unknown
+  authorizationStatus: AuthorizationStatus.Unknown,
+  isOffersDataLoading: false
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -25,6 +26,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(setLoadingOffersStatus, (state, action) => {
+      state.isOffersDataLoading = action.payload;
     })
     .addCase(changeSortType, (state, action) => {
       state.sortType = action.payload.sortType;
