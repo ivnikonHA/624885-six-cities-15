@@ -8,6 +8,7 @@ import Logo from '../logo/logo';
 
 export default function Header(): JSX.Element {
   const isAuthorized = useAppSelector((state) => state.authorizationStatus) === AuthorizationStatus.Auth;
+  const userData = useAppSelector((state) => state.userData);
   const dispatch = useAppDispatch();
   return (
     <header className="header">
@@ -27,7 +28,7 @@ export default function Header(): JSX.Element {
                   </div>
                   {isAuthorized ? (
                     <>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                      <span className="header__user-name user__name">{userData.email}</span>
                       <span className="header__favorite-count">3</span>
 
                     </>)
