@@ -12,9 +12,8 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import PrivateRoute from '../private-route/private-route';
 
 export default function App(): JSX.Element {
-  const isAuthorized = useAppSelector((state) => state.authorizationStatus);
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-  if(isOffersDataLoading) {
+  if (isOffersDataLoading) {
     return <LoadingPage />;
   }
 
@@ -29,7 +28,7 @@ export default function App(): JSX.Element {
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute authorizationStatus={isAuthorized}>
+              <PrivateRoute>
                 <FavoritesPage />
               </PrivateRoute>
             }

@@ -1,14 +1,17 @@
 import { FormEvent, ReactEventHandler, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Navigate } from 'react-router-dom';
 
 import Header from '../../components/header/header';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppSelector } from '../../hooks/useAppSelector';
 import { loginAction } from '../../store/api-actions';
 import { AuthData } from '../../types/auth-data';
 
 type ChangeHandler = ReactEventHandler<HTMLInputElement>;
 
-export default function LoginPage() : JSX.Element {
+export default function LoginPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({
     email: '',
@@ -16,7 +19,7 @@ export default function LoginPage() : JSX.Element {
   });
   const handleFieldChange: ChangeHandler = (evt) => {
     const { name, value } = evt.currentTarget;
-    setFormData({...formData, [name]: value});
+    setFormData({ ...formData, [name]: value });
   };
   const handleSubmitForm = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -26,6 +29,11 @@ export default function LoginPage() : JSX.Element {
     };
     dispatch(loginAction(authData));
   };
+
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    return <Navigate to={AppRoute.Root} />;
+  }
 
   return (
     <div className="page page--gray page--login">
