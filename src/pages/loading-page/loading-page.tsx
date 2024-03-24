@@ -2,7 +2,7 @@ import './loader-page.css';
 
 function LoadingPage(): JSX.Element {
   return (
-    <div className="loding-page">
+    <div className="loading-page">
       <p>Loading ...</p>
       <div className="lds-roller">
         <div></div>
