@@ -95,4 +95,9 @@ const enum Pages {
 const URL_MARKER_DEFAULT = './img/pin.svg';
 const URL_MARKER_CURRENT = './img/pin-active.svg';
 
-export { APIRoute, AppRoute, AuthorizationStatus, CITIES, CitiesListItems, Pages, SortOptions, URL_MARKER_CURRENT, URL_MARKER_DEFAULT };
+const enum NameSpace {
+  Offers = 'OFFERS',
+  User = 'USER'
+}
+
+export { APIRoute, AppRoute, AuthorizationStatus, CITIES, CitiesListItems, NameSpace, Pages, SortOptions, URL_MARKER_CURRENT, URL_MARKER_DEFAULT };
