@@ -7,7 +7,7 @@ import { AuthData } from '../types/auth-data';
 import { OfferType } from '../types/offers';
 import { AppDispatch } from '../types/state';
 import { UserData } from '../types/user-data';
-import { loadOffers, requireAuthorization, setLoadingOffersStatus } from './action';
+import { loadOffers, requireAuthorization, setLoadingOffersStatus, setUserData } from './action';
 
 type ApiThunkConfigObject = {
   dispatch: AppDispatch;
@@ -28,8 +28,9 @@ const checkAuthAction = createAsyncThunk<void, undefined, ApiThunkConfigObject>(
   'checkAuth',
   async (_arg, { dispatch, extra: api }) => {
     try {
-      await api.get(APIRoute.Login);
+      const res = await api.get<UserData>(APIRoute.Login);
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      dispatch(setUserData(res.data));
     } catch {
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     }
@@ -39,9 +40,10 @@ const checkAuthAction = createAsyncThunk<void, undefined, ApiThunkConfigObject>(
 const loginAction = createAsyncThunk<void, AuthData, ApiThunkConfigObject>(
   'login',
   async ({ login: email, password }, { dispatch, extra: api }) => {
-    const { data: { token } } = await api.post<UserData>(APIRoute.Login, { email, password });
-    saveToken(token);
+    const res = await api.post<UserData>(APIRoute.Login, { email, password });
+    saveToken(res.data.token);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    dispatch(setUserData(res.data));
   }
 );
 
