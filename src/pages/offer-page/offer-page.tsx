@@ -8,16 +8,17 @@ import ReviewForm from '../../components/review-form/review-form';
 import ReviewsItems from '../../components/reviews-items/reviews-items';
 import { AuthorizationStatus, Pages } from '../../const';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import getAuthorization from '../../mocks/authorization-mock';
 import { COMMENTS } from '../../mocks/comments-mock';
 import { mockNearbyArray } from '../../mocks/nearby-mock';
+import { getOffers } from '../../store/selectors/offers-selectors';
+import { getAuthorizationStatus } from '../../store/selectors/user-selectors';
 import { OfferType } from '../../types/offers';
 import NotFoundPage from '../not-found-page/not-found-page';
 
 
 export default function OfferPage(): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
-  const isAuthorized = getAuthorization() === AuthorizationStatus.Auth;
+  const offers = useAppSelector(getOffers);
+  const isAuthorized = useAppSelector(getAuthorizationStatus) === AuthorizationStatus.Auth;
   const { id } = useParams();
   const currentOffer = offers.find((offer: OfferType) => (offer.id === id));
   if (!currentOffer) {

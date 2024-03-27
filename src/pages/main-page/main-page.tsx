@@ -6,13 +6,14 @@ import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import { CitiesListItems } from '../../const';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import { getActiveOffer, getCurrentCity, getOffers } from '../../store/selectors/offers-selectors';
 
 export default function MainPage(): JSX.Element {
-  const currentCity = useAppSelector((state) => state.currentCity);
-  const offers = useAppSelector((state) => state.offers)
+  const currentCity = useAppSelector(getCurrentCity);
+  const offers = useAppSelector(getOffers)
     .filter((offer) => offer.city.name === currentCity.name);
   const placesCount = offers.length;
-  const activeOffer = useAppSelector((state) => state.activeOffer);
+  const activeOffer = useAppSelector(getActiveOffer);
   const citiesNamesList = Object.values(CitiesListItems);
 
   return (

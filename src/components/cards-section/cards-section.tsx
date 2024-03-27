@@ -1,7 +1,8 @@
 import { Pages } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { activeOffer } from '../../store/action';
+import { getSortType } from '../../store/selectors/offers-selectors';
+import { activeOffer } from '../../store/slices/offers-slice';
 import { OfferType } from '../../types/offers';
 import { sorting } from '../../utils';
 import CardsList from '../cards-list/cards-list';
@@ -18,7 +19,7 @@ export default function CardsSection({ placesCount, offers, currentCity }: Cards
   const handleCardHover = (offer: OfferType | null) => {
     dispatch(activeOffer({ offerId: offer?.id }));
   };
-  const sortType = useAppSelector((state) => state.sortType);
+  const sortType = useAppSelector(getSortType);
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>

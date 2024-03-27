@@ -23,7 +23,7 @@ const offersSlice = createSlice({
     changeSortType: (state, action: PayloadAction<{ sortType: string }>) => {
       state.sortType = action.payload.sortType;
     },
-    activeOffer: (state, action: PayloadAction<{ offerId: string }>) => {
+    activeOffer: (state, action: PayloadAction<{ offerId: string | undefined }>) => {
       state.activeOffer = action.payload.offerId;
     },
   },

@@ -4,11 +4,16 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { logoutAction } from '../../store/api-actions';
+import {
+  getAuthorizationStatus,
+  getUserData,
+} from '../../store/selectors/user-selectors';
 import Logo from '../logo/logo';
 
 export default function Header(): JSX.Element {
-  const isAuthorized = useAppSelector((state) => state.authorizationStatus) === AuthorizationStatus.Auth;
-  const userData = useAppSelector((state) => state.userData);
+  const isAuthorized =
+    useAppSelector(getAuthorizationStatus) === AuthorizationStatus.Auth;
+  const userData = useAppSelector(getUserData);
   const dispatch = useAppDispatch();
   return (
     <header className="header">
@@ -24,18 +29,20 @@ export default function Header(): JSX.Element {
                   to={isAuthorized ? AppRoute.Favorites : AppRoute.Login}
                   className="header__nav-link header__nav-link--profile"
                 >
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
-                  </div>
+                  <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                   {isAuthorized ? (
                     <>
-                      <span className="header__user-name user__name">{userData.email}</span>
+                      <span className="header__user-name user__name">
+                        {userData.email}
+                      </span>
                       <span className="header__favorite-count">3</span>
-
-                    </>)
-                    : <span className="header__login">Sign in</span>}
+                    </>
+                  ) : (
+                    <span className="header__login">Sign in</span>
+                  )}
                 </Link>
               </li>
-              {isAuthorized &&
+              {isAuthorized && (
                 <li className="header__nav-item">
                   <Link
                     onClick={(evt) => {
@@ -47,7 +54,8 @@ export default function Header(): JSX.Element {
                   >
                     <span className="header__signout">Sign out</span>
                   </Link>
-                </li>}
+                </li>
+              )}
             </ul>
           </nav>
         </div>

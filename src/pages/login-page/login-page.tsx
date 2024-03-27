@@ -7,6 +7,7 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { loginAction } from '../../store/api-actions';
+import { getAuthorizationStatus } from '../../store/selectors/user-selectors';
 import { AuthData } from '../../types/auth-data';
 
 type ChangeHandler = ReactEventHandler<HTMLInputElement>;
@@ -30,7 +31,7 @@ export default function LoginPage(): JSX.Element {
     dispatch(loginAction(authData));
   };
 
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   if (authorizationStatus === AuthorizationStatus.Auth) {
     return <Navigate to={AppRoute.Root} />;
   }
