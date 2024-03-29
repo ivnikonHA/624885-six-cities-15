@@ -2,10 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { NameSpace } from '../../const';
 import { OfferStateType } from '../../types/state';
-import { fetchOfferByIdAction } from '../api-actions';
+import { fetchNearbyOffers, fetchOfferByIdAction } from '../api-actions';
 
 const initialState: OfferStateType = {
   currentOffer: null,
+  nearbyOffers: [],
   isOfferDataLoading: false
 };
 
@@ -21,6 +22,9 @@ const offerSlice = createSlice({
       })
       .addCase(fetchOfferByIdAction.pending, (state) => {
         state.isOfferDataLoading = true;
+      })
+      .addCase(fetchNearbyOffers.fulfilled, (state, action) => {
+        state.nearbyOffers = action.payload;
       });
   },
 });

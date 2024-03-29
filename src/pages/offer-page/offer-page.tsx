@@ -13,9 +13,9 @@ import { AuthorizationStatus, Pages } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { COMMENTS } from '../../mocks/comments-mock';
-import { mockNearbyArray } from '../../mocks/nearby-mock';
-import { fetchOfferByIdAction } from '../../store/api-actions';
-import { getCurrentOffer } from '../../store/selectors/offer-selectors';
+import { fetchNearbyOffers, fetchOfferByIdAction } from '../../store/api-actions';
+import { getCurrentOffer, getNearbyOffers } from '../../store/selectors/offer-selectors';
+import { getOffers } from '../../store/selectors/offers-selectors';
 import { getAuthorizationStatus } from '../../store/selectors/user-selectors';
 import NotFoundPage from '../not-found-page/not-found-page';
 
@@ -27,10 +27,18 @@ export default function OfferPage(): JSX.Element {
   useEffect(() =>{
     if(id) {
       dispatch(fetchOfferByIdAction(id));
+      dispatch(fetchNearbyOffers(id));
     }
   }, [id, dispatch]);
 
   const currentOffer = useAppSelector(getCurrentOffer);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
+  const offers = useAppSelector(getOffers);
+  const selectedOffer = offers.find((item) => item.id === id);
+  const nearbyOffersForMap = selectedOffer ?
+    [...nearbyOffers, selectedOffer]
+    : nearbyOffers;
+
   if (!currentOffer) {
     return <NotFoundPage />;
   }
@@ -148,7 +156,7 @@ export default function OfferPage(): JSX.Element {
           </div>
           <Map
             city={city}
-            offers={mockNearbyArray}
+            offers={nearbyOffersForMap}
             selectedOffer={currentOffer.id}
             page='offer'
           />
@@ -157,7 +165,7 @@ export default function OfferPage(): JSX.Element {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <CardsList offers={mockNearbyArray} page={Pages.Offer} />
+              <CardsList offers={nearbyOffers} page={Pages.Offer} />
             </div>
           </section>
         </div>

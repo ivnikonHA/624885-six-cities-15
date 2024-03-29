@@ -13,6 +13,7 @@ export type OffersStateType = {
 
 export type OfferStateType = {
   currentOffer: FullOfferType | null;
+  nearbyOffers: OfferType[];
   isOfferDataLoading: boolean;
 }
 

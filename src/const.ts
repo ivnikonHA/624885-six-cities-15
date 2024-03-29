@@ -77,6 +77,7 @@ const enum AppRoute {
 const enum APIRoute {
   Offers = '/offers',
   Offer = '/offers/:id',
+  Nearby = '/offers/:id/nearby',
   Login = '/login',
   Logout = '/logout'
 }

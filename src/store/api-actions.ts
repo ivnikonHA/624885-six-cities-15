@@ -13,8 +13,8 @@ const fetchOffersAction = createAsyncThunk<
   undefined,
   {extra: AxiosInstance}
 >('fetchOffers', async (_arg, { extra: api }) => {
-  const res = await api.get<OfferType[]>(APIRoute.Offers);
-  return res.data;
+  const { data } = await api.get<OfferType[]>(APIRoute.Offers);
+  return data;
 });
 
 const fetchOfferByIdAction = createAsyncThunk<
@@ -22,8 +22,17 @@ const fetchOfferByIdAction = createAsyncThunk<
   string,
   {extra: AxiosInstance}
 >('fetchOfferById', async (id, {extra: api}) => {
-  const res = await api.get<FullOfferType>(generatePath(APIRoute.Offer, {id}));
-  return res.data;
+  const { data } = await api.get<FullOfferType>(generatePath(APIRoute.Offer, {id}));
+  return data;
+});
+
+const fetchNearbyOffers = createAsyncThunk<
+  OfferType[],
+  string,
+  {extra: AxiosInstance}
+>('fetchNearbyOffers', async (id, {extra: api}) => {
+  const { data } = await api.get<OfferType[]>(generatePath(APIRoute.Nearby, {id}));
+  return data;
 });
 
 const checkAuthAction = createAsyncThunk<
@@ -31,16 +40,16 @@ const checkAuthAction = createAsyncThunk<
   undefined,
   {extra: AxiosInstance}
 >('checkAuth', async (_arg, { extra: api }) => {
-  const res = await api.get<UserData>(APIRoute.Login);
-  return res.data;
+  const { data } = await api.get<UserData>(APIRoute.Login);
+  return data;
 });
 
 const loginAction = createAsyncThunk<UserData, AuthData, {extra: AxiosInstance}>(
   'login',
   async ({ login: email, password }, { extra: api }) => {
-    const res = await api.post<UserData>(APIRoute.Login, { email, password });
-    saveToken(res.data.token);
-    return res.data;
+    const { data } = await api.post<UserData>(APIRoute.Login, { email, password });
+    saveToken(data.token);
+    return data;
   }
 );
 
@@ -52,4 +61,11 @@ const logoutAction = createAsyncThunk<void, undefined, {extra: AxiosInstance}>(
   }
 );
 
-export { checkAuthAction, fetchOfferByIdAction, fetchOffersAction, loginAction, logoutAction };
+export {
+  checkAuthAction,
+  fetchNearbyOffers,
+  fetchOfferByIdAction,
+  fetchOffersAction,
+  loginAction,
+  logoutAction
+};
