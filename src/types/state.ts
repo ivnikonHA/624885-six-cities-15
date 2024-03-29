@@ -12,7 +12,7 @@ export type OffersStateType = {
 }
 
 export type OfferStateType = {
-  currentOffer: FullOfferType;
+  currentOffer: FullOfferType | null;
   isOfferDataLoading: boolean;
 }
 

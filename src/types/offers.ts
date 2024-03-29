@@ -18,7 +18,7 @@ type FullOfferType = Omit<OfferType, 'previewImage'> & {
   host: HostType;
   images: string[];
   maxAdults: number;
-} | null
+}
 
 type HostType = {
   name: string;
