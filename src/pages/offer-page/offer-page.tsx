@@ -1,3 +1,5 @@
+import cn from 'classnames';
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 
@@ -6,25 +8,45 @@ import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import ReviewForm from '../../components/review-form/review-form';
 import ReviewsItems from '../../components/reviews-items/reviews-items';
+import Stars from '../../components/stars/stars';
 import { AuthorizationStatus, Pages } from '../../const';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { COMMENTS } from '../../mocks/comments-mock';
 import { mockNearbyArray } from '../../mocks/nearby-mock';
-import { getOffers } from '../../store/selectors/offers-selectors';
+import { fetchOfferByIdAction } from '../../store/api-actions';
+import { getCurrentOffer } from '../../store/selectors/offer-selectors';
 import { getAuthorizationStatus } from '../../store/selectors/user-selectors';
-import { OfferType } from '../../types/offers';
 import NotFoundPage from '../not-found-page/not-found-page';
 
-
 export default function OfferPage(): JSX.Element {
-  const offers = useAppSelector(getOffers);
   const isAuthorized = useAppSelector(getAuthorizationStatus) === AuthorizationStatus.Auth;
   const { id } = useParams();
-  const currentOffer = offers.find((offer: OfferType) => (offer.id === id));
+  const dispatch = useAppDispatch();
+
+  useEffect(() =>{
+    dispatch(fetchOfferByIdAction(id!));
+  }, [id, dispatch]);
+
+  const currentOffer = useAppSelector(getCurrentOffer);
   if (!currentOffer) {
     return <NotFoundPage />;
   }
-  const { title, type } = currentOffer;
+  const {
+    title,
+    type,
+    price,
+    city,
+    isFavorite,
+    isPremium,
+    rating,
+    bedrooms,
+    description,
+    goods,
+    host,
+    images,
+    maxAdults
+  } = currentOffer;
   return (
     <div className="page">
       <Helmet>
@@ -57,40 +79,39 @@ export default function OfferPage(): JSX.Element {
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
+              {isPremium &&
               <div className="offer__mark">
                 <span>Premium</span>
-              </div>
+              </div>}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
                   {title}
                 </h1>
-                <button className="offer__bookmark-button button" type="button">
+                <button className={
+                  cn('offer__bookmark-button', 'button',
+                    {'offer__bookmark-button--active': isFavorite})
+                } type="button"
+                >
                   <svg className="offer__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>
                 </button>
               </div>
-              <div className="offer__rating rating">
-                <div className="offer__stars rating__stars">
-                  <span style={{ width: '80%' }}></span>
-                  <span className="visually-hidden">Rating</span>
-                </div>
-                <span className="offer__rating-value rating__value">4.8</span>
-              </div>
+              <Stars rating={rating} page='offer' />
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
                   {type}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  3 Bedrooms
+                  {bedrooms} Bedrooms
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  Max 4 adults
+                  Max {maxAdults} adults
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">&euro;120</b>
+                <b className="offer__price-value">&euro;{price}</b>
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
               <div className="offer__inside">
@@ -131,22 +152,23 @@ export default function OfferPage(): JSX.Element {
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
-                  <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="offer__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
+                  <div className={
+                    cn('offer__avatar-wrapper', 'user__avatar-wrapper',
+                      {'offer__avatar-wrapper--pro': host.isPro})
+                  }
+                  >
+                    <img className="offer__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="offer__user-name">
-                    Angelina
+                    {host.name}
                   </span>
                   <span className="offer__user-status">
-                    Pro
+                    {host.isPro && 'Pro'}
                   </span>
                 </div>
                 <div className="offer__description">
                   <p className="offer__text">
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                  </p>
-                  <p className="offer__text">
-                    An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
+                    {description}
                   </p>
                 </div>
               </div>
@@ -160,9 +182,9 @@ export default function OfferPage(): JSX.Element {
             </div>
           </div>
           <Map
-            city={mockNearbyArray[0].city}
+            city={city}
             offers={mockNearbyArray}
-            selectedOffer={undefined}
+            selectedOffer={currentOffer.id}
             page='offer'
           />
         </section>

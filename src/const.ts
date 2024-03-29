@@ -76,6 +76,7 @@ const enum AppRoute {
 
 const enum APIRoute {
   Offers = '/offers',
+  Offer = '/offers/:id',
   Login = '/login',
   Logout = '/logout'
 }
@@ -97,6 +98,7 @@ const URL_MARKER_CURRENT = './img/pin-active.svg';
 
 const enum NameSpace {
   Offers = 'OFFERS',
+  Offer = 'OFFER',
   User = 'USER'
 }
 

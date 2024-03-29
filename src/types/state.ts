@@ -1,14 +1,19 @@
 import { AuthorizationStatus } from '../const';
 import { store } from '../store';
-import { CityType, OfferType } from './offers';
+import { CityType, FullOfferType, OfferType } from './offers';
 import { UserData } from './user-data';
 
-export type InitialStateType = {
+export type OffersStateType = {
   currentCity: CityType;
   offers: OfferType[];
   activeOffer?: string;
   sortType: string;
   isOffersDataLoading: boolean;
+}
+
+export type OfferStateType = {
+  currentOffer: FullOfferType;
+  isOfferDataLoading: boolean;
 }
 
 export type UserState = {

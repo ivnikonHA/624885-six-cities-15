@@ -2,10 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { CITIES, NameSpace, SortOptions } from '../../const';
 import { CityType } from '../../types/offers';
-import { InitialStateType } from '../../types/state';
+import { OffersStateType } from '../../types/state';
 import { fetchOffersAction } from '../api-actions';
 
-const initialState: InitialStateType = {
+const initialState: OffersStateType = {
   currentCity: CITIES[0],
   offers: [],
   activeOffer: undefined,
