@@ -79,7 +79,8 @@ const enum APIRoute {
   Offer = '/offers/:id',
   Nearby = '/offers/:id/nearby',
   Login = '/login',
-  Logout = '/logout'
+  Logout = '/logout',
+  Reviews = '/comments/:id'
 }
 
 const enum AuthorizationStatus {
@@ -100,6 +101,7 @@ const URL_MARKER_CURRENT = './img/pin-active.svg';
 const enum NameSpace {
   Offers = 'OFFERS',
   Offer = 'OFFER',
+  Reviews = 'REVIEWS',
   User = 'USER'
 }
 

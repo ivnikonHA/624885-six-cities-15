@@ -13,9 +13,10 @@ import { AuthorizationStatus, Pages } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { COMMENTS } from '../../mocks/comments-mock';
-import { fetchNearbyOffers, fetchOfferByIdAction } from '../../store/api-actions';
+import { fetchNearbyOffers, fetchOfferByIdAction, fetchReviews } from '../../store/api-actions';
 import { getCurrentOffer, getNearbyOffers } from '../../store/selectors/offer-selectors';
 import { getOffers } from '../../store/selectors/offers-selectors';
+import { getReviews } from '../../store/selectors/reviews-selectors';
 import { getAuthorizationStatus } from '../../store/selectors/user-selectors';
 import NotFoundPage from '../not-found-page/not-found-page';
 
@@ -28,12 +29,14 @@ export default function OfferPage(): JSX.Element {
     if(id) {
       dispatch(fetchOfferByIdAction(id));
       dispatch(fetchNearbyOffers(id));
+      dispatch(fetchReviews(id));
     }
   }, [id, dispatch]);
 
   const currentOffer = useAppSelector(getCurrentOffer);
   const nearbyOffers = useAppSelector(getNearbyOffers);
   const offers = useAppSelector(getOffers);
+  const reviews = useAppSelector(getReviews);
   const selectedOffer = offers.find((item) => item.id === id);
   const nearbyOffersForMap = selectedOffer ?
     [...nearbyOffers, selectedOffer]
@@ -148,7 +151,7 @@ export default function OfferPage(): JSX.Element {
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{COMMENTS.length}</span></h2>
                 <ul className="reviews__list">
-                  <ReviewsItems comments={COMMENTS} />
+                  {reviews && <ReviewsItems comments={reviews} />}
                 </ul>
                 {isAuthorized && <ReviewForm />}
               </section>

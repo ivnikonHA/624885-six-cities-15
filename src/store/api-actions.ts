@@ -5,6 +5,7 @@ import { generatePath } from 'react-router-dom';
 import { APIRoute } from '../const';
 import { dropToken, saveToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
+import { CommentType } from '../types/comments';
 import { FullOfferType, OfferType } from '../types/offers';
 import { UserData } from '../types/user-data';
 
@@ -32,6 +33,15 @@ const fetchNearbyOffers = createAsyncThunk<
   {extra: AxiosInstance}
 >('fetchNearbyOffers', async (id, {extra: api}) => {
   const { data } = await api.get<OfferType[]>(generatePath(APIRoute.Nearby, {id}));
+  return data;
+});
+
+const fetchReviews = createAsyncThunk<
+  CommentType[],
+  string,
+  {extra: AxiosInstance}
+>('fetchReviews', async (id, {extra: api}) => {
+  const { data } = await api.get<CommentType[]>(generatePath(APIRoute.Reviews, {id}));
   return data;
 });
 
@@ -66,6 +76,7 @@ export {
   fetchNearbyOffers,
   fetchOfferByIdAction,
   fetchOffersAction,
+  fetchReviews,
   loginAction,
   logoutAction
 };

@@ -29,5 +29,5 @@ const offerSlice = createSlice({
   },
 });
 
-export { fetchOfferByIdAction, offerSlice };
+export { offerSlice };
 

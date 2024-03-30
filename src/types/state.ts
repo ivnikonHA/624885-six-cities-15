@@ -1,5 +1,6 @@
 import { AuthorizationStatus } from '../const';
 import { store } from '../store';
+import { CommentType } from './comments';
 import { CityType, FullOfferType, OfferType } from './offers';
 import { UserData } from './user-data';
 
@@ -15,6 +16,10 @@ export type OfferStateType = {
   currentOffer: FullOfferType | null;
   nearbyOffers: OfferType[];
   isOfferDataLoading: boolean;
+}
+
+export type ReviewsStateType = {
+  reviews: CommentType[] | null;
 }
 
 export type UserState = {
