@@ -1,20 +1,20 @@
+import { useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 import CardsSection from '../../components/cards-section/cards-section';
 import CitiesList from '../../components/cities-list/cities-list';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
-import { CitiesListItems } from '../../const';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { getActiveOffer, getCurrentCity, getOffers } from '../../store/selectors/offers-selectors';
 
-export default function MainPage(): JSX.Element {
+function MainPage(): JSX.Element {
   const currentCity = useAppSelector(getCurrentCity);
-  const offers = useAppSelector(getOffers)
-    .filter((offer) => offer.city.name === currentCity.name);
-  const placesCount = offers.length;
+  const offers = useAppSelector(getOffers);
+  const filteredOffers = useMemo(() => (offers
+    .filter((offer) => offer.city.name === currentCity.name)),[currentCity.name, offers]);
+  const placesCount = filteredOffers.length;
   const activeOffer = useAppSelector(getActiveOffer);
-  const citiesNamesList = Object.values(CitiesListItems);
 
   return (
     <div className="page page--gray page--main">
@@ -26,20 +26,20 @@ export default function MainPage(): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CitiesList items={citiesNamesList} />
+            <CitiesList />
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <CardsSection
               placesCount={placesCount}
-              offers={offers}
+              offers={filteredOffers}
               currentCity={currentCity.name}
             />
             <div className="cities__right-section">
               <Map
                 city={currentCity}
-                offers={offers}
+                offers={filteredOffers}
                 selectedOffer={activeOffer}
                 page='cities'
               />
@@ -50,3 +50,5 @@ export default function MainPage(): JSX.Element {
     </div>
   );
 }
+
+export default MainPage;
