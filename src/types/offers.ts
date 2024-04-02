@@ -11,6 +11,21 @@ type OfferType = {
   rating: number;
 };
 
+type FullOfferType = Omit<OfferType, 'previewImage'> & {
+  bedrooms: number;
+  description: string;
+  goods: string[];
+  host: HostType;
+  images: string[];
+  maxAdults: number;
+}
+
+type HostType = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+}
+
 type CityType = {
   name: ('Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf');
   location: LocationType;
@@ -22,4 +37,4 @@ type LocationType = {
   zoom: number;
 };
 
-export type {CityType,LocationType, OfferType};
+export type {CityType,FullOfferType, HostType,LocationType, OfferType};

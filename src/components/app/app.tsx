@@ -9,10 +9,11 @@ import LoginPage from '../../pages/login-page/login-page';
 import MainPage from '../../pages/main-page/main-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import OfferPage from '../../pages/offer-page/offer-page';
+import { getOffersDataLoadingStatus } from '../../store/selectors/offers-selectors';
 import PrivateRoute from '../private-route/private-route';
 
 export default function App(): JSX.Element {
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
   if (isOffersDataLoading) {
     return <LoadingPage />;
   }
