@@ -5,7 +5,7 @@ import { generatePath } from 'react-router-dom';
 import { APIRoute } from '../const';
 import { dropToken, saveToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
-import { CommentType } from '../types/comments';
+import { CommentType, ReviewType } from '../types/comments';
 import { FullOfferType, OfferType } from '../types/offers';
 import { UserData } from '../types/user-data';
 
@@ -45,6 +45,15 @@ const fetchReviews = createAsyncThunk<
   return data;
 });
 
+const postReviewAction = createAsyncThunk<
+  CommentType,
+  ReviewType,
+  {extra: AxiosInstance}
+>('postReview', async (reviewMessage, {extra: api}) => {
+  const { data } = await api.post<CommentType>(generatePath(APIRoute.Reviews, {id: reviewMessage.id}), { comment: reviewMessage.comment, rating: reviewMessage.rating});
+  return data;
+});
+
 const checkAuthAction = createAsyncThunk<
   UserData,
   undefined,
@@ -78,5 +87,6 @@ export {
   fetchOffersAction,
   fetchReviews,
   loginAction,
-  logoutAction
+  logoutAction,
+  postReviewAction
 };

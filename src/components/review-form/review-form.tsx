@@ -1,4 +1,10 @@
-import React, { ReactEventHandler, useState } from 'react';
+import React, { FormEvent, ReactEventHandler, useState } from 'react';
+
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { postReviewAction } from '../../store/api-actions';
+import { getActiveOffer } from '../../store/selectors/offers-selectors';
+import { ReviewType } from '../../types/comments';
 
 type ChangeHandler = ReactEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 
@@ -7,9 +13,24 @@ export default function ReviewForm(): JSX.Element {
     rating: '',
     review: ''
   });
+
+  const activeOffer = useAppSelector(getActiveOffer);
+  const dispatch = useAppDispatch();
+
   const handleFieldChange: ChangeHandler = (evt) => {
     const { name, value } = evt.currentTarget;
     setFormData({ ...formData, [name]: value });
+  };
+  const handleSubmitForm = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    if(activeOffer) {
+      const reviewMessage: ReviewType = {
+        id: activeOffer,
+        comment: formData.review,
+        rating: Number(formData.rating)
+      };
+      dispatch(postReviewAction(reviewMessage));
+    }
   };
   const ratings = [
     { stars: '5', title: 'perfect' },
@@ -19,7 +40,7 @@ export default function ReviewForm(): JSX.Element {
     { stars: '1', title: 'terribly' },
   ];
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form onSubmit={handleSubmitForm} className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {ratings.map(({ stars, title }) => (

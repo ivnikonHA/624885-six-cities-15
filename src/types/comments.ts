@@ -11,5 +11,10 @@ type CommentType = {
   rating: number;
   user: UserType;
 }
+type ReviewType = {
+  id: string;
+  comment: string;
+  rating: number;
+}
 
-export type {CommentType};
+export type {CommentType, ReviewType};
