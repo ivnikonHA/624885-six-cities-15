@@ -1,4 +1,6 @@
-export default function Footer() : JSX.Element {
+import { memo } from 'react';
+
+function Footer() : JSX.Element {
   return (
     <footer className="footer container">
       <a className="footer__logo-link" href="main.html">
@@ -6,3 +8,6 @@ export default function Footer() : JSX.Element {
       </a>
     </footer>);
 }
+
+const MemoizedFooter = memo(Footer);
+export default MemoizedFooter;

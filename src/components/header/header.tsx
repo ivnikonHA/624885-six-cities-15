@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 
 import { AppRoute, AuthorizationStatus } from '../../const';
@@ -10,7 +11,7 @@ import {
 } from '../../store/selectors/user-selectors';
 import Logo from '../logo/logo';
 
-export default function Header(): JSX.Element {
+function Header(): JSX.Element {
   const isAuthorized =
     useAppSelector(getAuthorizationStatus) === AuthorizationStatus.Auth;
   const userData = useAppSelector(getUserData);
@@ -63,3 +64,5 @@ export default function Header(): JSX.Element {
     </header>
   );
 }
+const MemoizedHeader = memo(Header);
+export default MemoizedHeader;
