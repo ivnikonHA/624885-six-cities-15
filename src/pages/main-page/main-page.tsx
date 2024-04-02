@@ -13,7 +13,6 @@ function MainPage(): JSX.Element {
   const offers = useAppSelector(getOffers);
   const filteredOffers = useMemo(() => (offers
     .filter((offer) => offer.city.name === currentCity.name)),[currentCity.name, offers]);
-  const placesCount = filteredOffers.length;
   const activeOffer = useAppSelector(getActiveOffer);
 
   return (
@@ -32,7 +31,6 @@ function MainPage(): JSX.Element {
         <div className="cities">
           <div className="cities__places-container container">
             <CardsSection
-              placesCount={placesCount}
               offers={filteredOffers}
               currentCity={currentCity.name}
             />

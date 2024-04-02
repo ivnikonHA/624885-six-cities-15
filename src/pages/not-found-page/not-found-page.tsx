@@ -28,9 +28,9 @@ export default function NotFoundPage() {
       <Helmet>
         <title>6 Cities : Error page</title>
       </Helmet>
-      <Header></Header>
+      <Header />
       <div style={notFoundWrapperStyle}>
-        <b style={notFoundStyle}>Page not found</b>
+        <b style={notFoundStyle}>404. Page not found</b>
         <Link to="/">Go to main.</Link>
       </div>
     </React.Fragment>
