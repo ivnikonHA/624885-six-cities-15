@@ -1,21 +1,20 @@
 import classNames from 'classnames';
+import { memo } from 'react';
 
 import { CITIES } from '../../const';
+import { CitiesListItems } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { getCurrentCity } from '../../store/selectors/offers-selectors';
 import { changeCurrentCity } from '../../store/slices/offers-slice';
 
-type CitiesListProps = {
-  items: string[];
-};
-
-export default function CitiesList({ items }: CitiesListProps): JSX.Element {
+function CitiesList(): JSX.Element {
+  const citiesNamesList = Object.values(CitiesListItems);
   const currentCity = useAppSelector(getCurrentCity);
   const dispatch = useAppDispatch();
   return (
     <ul className="locations__list tabs__list">
-      {items.map((item) => (
+      {citiesNamesList.map((item) => (
         <li key={item} className="locations__item">
           <a
             className={classNames('locations__item-link', 'tabs__item', {
@@ -36,3 +35,6 @@ export default function CitiesList({ items }: CitiesListProps): JSX.Element {
     </ul>
   );
 }
+
+const MemoizedCitiesList = memo(CitiesList);
+export default MemoizedCitiesList;
