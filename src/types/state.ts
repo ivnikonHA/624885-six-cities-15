@@ -7,6 +7,7 @@ import { UserData } from './user-data';
 export type FavoritesStateType = {
   favorites: OfferType[];
   isLoading: boolean;
+  isSetting: boolean;
   isError: boolean;
 }
 

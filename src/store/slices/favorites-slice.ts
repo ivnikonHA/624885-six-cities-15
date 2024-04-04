@@ -7,6 +7,7 @@ import { fetchFavorites, setFavoriteById } from '../api-actions';
 const initialState: FavoritesStateType = {
   favorites: [],
   isLoading: false,
+  isSetting: false,
   isError: false
 };
 
@@ -33,6 +34,12 @@ const favoritesSlice = createSlice({
         } else {
           state.favorites = state.favorites.filter((item) => item.isFavorite);
         }
+      })
+      .addCase(setFavoriteById.pending, (state) => {
+        state.isSetting = true;
+      })
+      .addCase(setFavoriteById.rejected, (state) => {
+        state.isError = true;
       });
   },
 });

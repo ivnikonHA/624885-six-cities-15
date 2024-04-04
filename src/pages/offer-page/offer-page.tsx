@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 
 import CardsList from '../../components/cards-list/cards-list';
+import FavoriteButton from '../../components/favorite-button/favorite-button';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import ReviewForm from '../../components/review-form/review-form';
@@ -87,16 +88,7 @@ export default function OfferPage(): JSX.Element {
                 <h1 className="offer__name">
                   {title}
                 </h1>
-                <button className={
-                  cn('offer__bookmark-button', 'button',
-                    {'offer__bookmark-button--active': isFavorite})
-                } type="button"
-                >
-                  <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                {id && <FavoriteButton page={'offer'} isFavorite={isFavorite} offerId={id} />}
               </div>
               <Stars rating={rating} page='offer' />
               <ul className="offer__features">

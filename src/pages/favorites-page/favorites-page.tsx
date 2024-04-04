@@ -7,7 +7,7 @@ import Header from '../../components/header/header';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { fetchFavorites } from '../../store/api-actions';
-import { getFavorites } from '../../store/selectors/offers-selectors';
+import { getFavorites, getIsFavoritesLoading } from '../../store/selectors/offers-selectors';
 
 export default function FavoritesPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -16,18 +16,20 @@ export default function FavoritesPage(): JSX.Element {
   },[dispatch]
   );
   const offers = useAppSelector(getFavorites);
+  const isLoading = useAppSelector(getIsFavoritesLoading);
+
   return (
     <div className="page">
       <Helmet>
         <title>6 Cities : Favorites page</title>
       </Helmet>
-      <Header></Header>
+      <Header />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              <FavoritesList offers={offers} />
+              {!isLoading && <FavoritesList offers={offers} />}
             </ul>
           </section>
         </div>
