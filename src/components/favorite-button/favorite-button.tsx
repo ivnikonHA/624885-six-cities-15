@@ -1,6 +1,8 @@
 import cn from 'classnames';
 import { memo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import { AppRoute } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { fetchFavorites, setFavoriteById } from '../../store/api-actions';
@@ -14,6 +16,7 @@ type FavoriteButtonProps = {
 
 function FavoriteButtonComponent({page, offerId, isFavorite}: FavoriteButtonProps): JSX.Element {
   const [isSet, toggleStatus] = useState(isFavorite);
+  const navigate = useNavigate();
   const buttonClass = cn(
     `${page}__bookmark-button button`,
     {[`${page}__bookmark-button--active`]: isSet}
@@ -30,6 +33,7 @@ function FavoriteButtonComponent({page, offerId, isFavorite}: FavoriteButtonProp
 
   const handleFavoriteButtonClick = () => {
     if(!isAuthorized) {
+      navigate(AppRoute.Login);
       return;
     }
     dispatch(setFavoriteById({id: offerId, isFavorite: !isSet}));
