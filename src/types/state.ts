@@ -4,6 +4,12 @@ import { CommentType } from './comments';
 import { CityType, FullOfferType, OfferType } from './offers';
 import { UserData } from './user-data';
 
+export type FavoritesStateType = {
+  favorites: OfferType[];
+  isLoading: boolean;
+  isError: boolean;
+}
+
 export type OffersStateType = {
   currentCity: CityType;
   offers: OfferType[];

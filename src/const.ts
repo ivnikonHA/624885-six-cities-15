@@ -80,7 +80,9 @@ const enum APIRoute {
   Nearby = '/offers/:id/nearby',
   Login = '/login',
   Logout = '/logout',
-  Reviews = '/comments/:id'
+  Reviews = '/comments/:id',
+  Favorites = '/favorite',
+  FavoriteById = '/favorite/:id/:status'
 }
 
 const enum AuthorizationStatus {
@@ -99,6 +101,7 @@ const URL_MARKER_DEFAULT = './img/pin.svg';
 const URL_MARKER_CURRENT = './img/pin-active.svg';
 
 const enum NameSpace {
+  Favorites = 'FAVORITES',
   Offers = 'OFFERS',
   Offer = 'OFFER',
   Reviews = 'REVIEWS',

@@ -10,10 +10,12 @@ const getActiveOffer = (state: State): string | undefined =>
 const getCurrentCity = (state: State): CityType =>
   state[NameSpace.Offers].currentCity;
 const getSortType = (state: State): string => state[NameSpace.Offers].sortType;
+const getFavorites = (state: State): OfferType[] => state[NameSpace.Favorites].favorites;
 
 export {
   getActiveOffer,
   getCurrentCity,
+  getFavorites,
   getOffers,
   getOffersDataLoadingStatus,
   getSortType,

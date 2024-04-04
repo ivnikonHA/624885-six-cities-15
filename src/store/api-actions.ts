@@ -6,6 +6,7 @@ import { APIRoute } from '../const';
 import { dropToken, saveToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
 import { CommentType, ReviewType } from '../types/comments';
+import { FavoriteType } from '../types/favorites';
 import { FullOfferType, OfferType } from '../types/offers';
 import { UserData } from '../types/user-data';
 
@@ -54,6 +55,25 @@ const postReviewAction = createAsyncThunk<
   return data;
 });
 
+const fetchFavorites = createAsyncThunk<
+  OfferType[],
+  undefined,
+  {extra: AxiosInstance}
+>('fetchFavorites', async (_arg, {extra: api}) => {
+  const { data } = await api.get<OfferType[]>(APIRoute.Favorites);
+  return data;
+});
+
+const setFavoriteById = createAsyncThunk<
+  OfferType,
+  FavoriteType,
+  {extra: AxiosInstance}
+>('setFavoriteById', async ({id, isFavorite}, {extra: api}) => {
+  const status = Number(isFavorite).toString();
+  const { data } = await api.post<OfferType>(generatePath(APIRoute.FavoriteById, {id, status}), {});
+  return data;
+});
+
 const checkAuthAction = createAsyncThunk<
   UserData,
   undefined,
@@ -82,11 +102,13 @@ const logoutAction = createAsyncThunk<void, undefined, {extra: AxiosInstance}>(
 
 export {
   checkAuthAction,
+  fetchFavorites,
   fetchNearbyOffers,
   fetchOfferByIdAction,
   fetchOffersAction,
   fetchReviews,
   loginAction,
   logoutAction,
-  postReviewAction
+  postReviewAction,
+  setFavoriteById
 };
