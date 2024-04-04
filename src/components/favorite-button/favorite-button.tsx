@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { fetchFavorites, setFavoriteById } from '../../store/api-actions';
+import { setFavoriteById } from '../../store/api-actions';
 import { getIsAuthorized } from '../../store/selectors/user-selectors';
 
 type FavoriteButtonProps = {
@@ -37,7 +37,6 @@ function FavoriteButtonComponent({page, offerId, isFavorite}: FavoriteButtonProp
       return;
     }
     dispatch(setFavoriteById({id: offerId, isFavorite: !isSet}));
-    dispatch(fetchFavorites());
     toggleStatus((prevStatus) => !prevStatus);
   };
 

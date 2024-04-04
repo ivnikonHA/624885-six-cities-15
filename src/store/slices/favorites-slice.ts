@@ -32,7 +32,7 @@ const favoritesSlice = createSlice({
         if(action.payload.isFavorite) {
           state.favorites.push(action.payload);
         } else {
-          state.favorites = state.favorites.filter((item) => item.isFavorite);
+          state.favorites = state.favorites.filter((item) => item.id !== action.payload.id);
         }
       })
       .addCase(setFavoriteById.pending, (state) => {
