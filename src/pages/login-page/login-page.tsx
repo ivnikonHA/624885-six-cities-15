@@ -28,7 +28,9 @@ export default function LoginPage(): JSX.Element {
       login: formData.email,
       password: formData.password
     };
-    dispatch(loginAction(authData));
+    if(authData.password.length > 1) {
+      dispatch(loginAction(authData));
+    }
   };
 
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
