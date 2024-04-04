@@ -1,10 +1,10 @@
 import { generatePath, Link } from 'react-router-dom';
 
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { fetchOffersAction, setFavoriteById } from '../../store/api-actions';
-import { getAuthorizationStatus } from '../../store/selectors/user-selectors';
+import { getIsAuthorized } from '../../store/selectors/user-selectors';
 import { OfferType } from '../../types/offers';
 import Stars from '../stars/stars';
 
@@ -16,7 +16,7 @@ type CardProps = {
 
 export default function Card({ offer, page, handler }: CardProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const isAuthorized = useAppSelector(getAuthorizationStatus) === AuthorizationStatus.Auth;
+  const isAuthorized = useAppSelector(getIsAuthorized);
   const { id, title, type, price, isFavorite, isPremium, previewImage, rating } = offer;
   const handlerCardMouseEnter = () => {
     if (handler) {
