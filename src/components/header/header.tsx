@@ -5,6 +5,7 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { logoutAction } from '../../store/api-actions';
+import { getFavorites } from '../../store/selectors/offers-selectors';
 import {
   getAuthorizationStatus,
   getUserData,
@@ -15,6 +16,7 @@ function Header(): JSX.Element {
   const isAuthorized =
     useAppSelector(getAuthorizationStatus) === AuthorizationStatus.Auth;
   const userData = useAppSelector(getUserData);
+  const numberOfFavorites = useAppSelector(getFavorites).length;
   const dispatch = useAppDispatch();
   return (
     <header className="header">
@@ -36,7 +38,7 @@ function Header(): JSX.Element {
                       <span className="header__user-name user__name">
                         {userData.email}
                       </span>
-                      <span className="header__favorite-count">3</span>
+                      <span className="header__favorite-count">{numberOfFavorites}</span>
                     </>
                   ) : (
                     <span className="header__login">Sign in</span>

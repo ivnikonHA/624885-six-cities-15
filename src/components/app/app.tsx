@@ -14,6 +14,7 @@ import PrivateRoute from '../private-route/private-route';
 
 export default function App(): JSX.Element {
   const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
+
   if (isOffersDataLoading) {
     return <LoadingPage />;
   }
