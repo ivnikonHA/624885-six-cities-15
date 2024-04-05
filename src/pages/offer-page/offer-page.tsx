@@ -54,12 +54,13 @@ export default function OfferPage(): JSX.Element {
     goods,
     host,
     images,
-    maxAdults
+    maxAdults,
+    location
   } = currentOffer;
   let selectedOffer: OfferType;
   let nearbyOffersForMap: OfferType[] = [];
   if(id) {
-    selectedOffer = {id, title, type, price, city, isFavorite, isPremium, rating, location: currentOffer.location, previewImage:''};
+    selectedOffer = {id, title, type, price, city, isFavorite, isPremium, rating, location, previewImage:''};
     nearbyOffersForMap = selectedOffer ?
       [...nearbyOffers, selectedOffer]
       : nearbyOffers;
