@@ -40,6 +40,7 @@ export default function Map({ city, offers, selectedOffer, page }: MapProps): JS
   }, [city, map]);
 
   useEffect(() => {
+    markerLayer.current.clearLayers();
     if (map) {
       offers.forEach((offer): void => {
         leaflet.marker(
@@ -52,7 +53,7 @@ export default function Map({ city, offers, selectedOffer, page }: MapProps): JS
           .addTo(markerLayer.current);
       });
     }
-  });
+  }, [selectedOffer, map, offers]);
 
   return <section className={`${page}__map map`} ref={mapRef}></section>;
 }

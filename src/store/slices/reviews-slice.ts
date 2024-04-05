@@ -5,7 +5,9 @@ import { ReviewsStateType } from '../../types/state';
 import { fetchReviews, postReviewAction } from '../api-actions';
 
 const initialState: ReviewsStateType = {
-  reviews: null
+  reviews: [],
+  isReviewPosting: false,
+  isReviewsLoading: false
 };
 
 const reviewsSlice = createSlice({
@@ -16,9 +18,20 @@ const reviewsSlice = createSlice({
     builder
       .addCase(fetchReviews.fulfilled, (state, action) => {
         state.reviews = action.payload;
+        state.isReviewsLoading = false;
+      })
+      .addCase(fetchReviews.pending, (state) => {
+        state.isReviewsLoading = true;
       })
       .addCase(postReviewAction.fulfilled, (state, acton) => {
-        state.reviews?.push(acton.payload);
+        state.reviews.push(acton.payload);
+        state.isReviewPosting = false;
+      })
+      .addCase(postReviewAction.rejected, (state) => {
+        state.isReviewPosting = false;
+      })
+      .addCase(postReviewAction.pending, (state) => {
+        state.isReviewPosting = true;
       });
   },
 });

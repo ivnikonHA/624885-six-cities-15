@@ -26,7 +26,9 @@ export type OfferStateType = {
 }
 
 export type ReviewsStateType = {
-  reviews: CommentType[] | null;
+  reviews: CommentType[];
+  isReviewPosting: boolean;
+  isReviewsLoading: boolean;
 }
 
 export type UserState = {

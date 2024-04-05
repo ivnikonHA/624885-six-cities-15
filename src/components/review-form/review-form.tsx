@@ -1,9 +1,10 @@
-import React, { FormEvent, ReactEventHandler, useState } from 'react';
+import React, { FormEvent, ReactEventHandler, useRef, useState } from 'react';
 
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { postReviewAction } from '../../store/api-actions';
-import { getActiveOffer } from '../../store/selectors/offers-selectors';
+import { getCurrentOffer } from '../../store/selectors/offer-selectors';
+import { getIsReviewPosting } from '../../store/selectors/reviews-selectors';
 import { ReviewType } from '../../types/comments';
 
 type ChangeHandler = ReactEventHandler<HTMLInputElement | HTMLTextAreaElement>;
@@ -14,8 +15,19 @@ export default function ReviewForm(): JSX.Element {
     review: ''
   });
 
-  const activeOffer = useAppSelector(getActiveOffer);
+  const currentOffer = useAppSelector(getCurrentOffer);
   const dispatch = useAppDispatch();
+  const isReviewPosting = useAppSelector(getIsReviewPosting);
+
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const handleFormSuccess = () => {
+    formRef.current?.reset();
+    setFormData({...formData, review: '' });
+  };
+  const handleFormError = () => {
+
+  };
 
   const handleFieldChange: ChangeHandler = (evt) => {
     const { name, value } = evt.currentTarget;
@@ -23,15 +35,16 @@ export default function ReviewForm(): JSX.Element {
   };
   const handleSubmitForm = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    if(activeOffer) {
+    if(currentOffer) {
       const reviewMessage: ReviewType = {
-        id: activeOffer,
+        id: currentOffer.id,
         comment: formData.review,
         rating: Number(formData.rating)
       };
-      dispatch(postReviewAction(reviewMessage));
+      dispatch(postReviewAction(reviewMessage)).unwrap().then(handleFormSuccess).catch(handleFormError);
     }
   };
+
   const ratings = [
     { stars: '5', title: 'perfect' },
     { stars: '4', title: 'good' },
@@ -39,8 +52,9 @@ export default function ReviewForm(): JSX.Element {
     { stars: '2', title: 'badly' },
     { stars: '1', title: 'terribly' },
   ];
+  const disableSubmitButton = formData.review.length > 300 || formData.review.length < 50 || formData.rating === '' || isReviewPosting;
   return (
-    <form onSubmit={handleSubmitForm} className="reviews__form form" action="#" method="post">
+    <form onSubmit={handleSubmitForm} className="reviews__form form" action="#" method="post" ref={formRef}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {ratings.map(({ stars, title }) => (
@@ -51,6 +65,7 @@ export default function ReviewForm(): JSX.Element {
               value={stars}
               id={`${stars}-stars`}
               type="radio"
+              disabled={isReviewPosting}
             />
             <label
               htmlFor={`${stars}-stars`}
@@ -71,6 +86,7 @@ export default function ReviewForm(): JSX.Element {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={formData.review}
+        disabled={isReviewPosting}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -79,7 +95,7 @@ export default function ReviewForm(): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={formData.review.length < 50 || formData.rating === ''}
+          disabled={disableSubmitButton}
         >
           Submit
         </button>
