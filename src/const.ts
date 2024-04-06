@@ -91,6 +91,18 @@ const enum AuthorizationStatus {
   Unknown = 'UNKNOWN'
 }
 
+const enum FavoriteStatus {
+  Added = 1,
+  Removed = 0
+}
+
+const enum RequestStatus {
+  Idle,
+  Loading,
+  Success,
+  Failed
+}
+
 const enum Pages {
   Main = 'cities',
   Favorites = 'favorites',
@@ -108,4 +120,4 @@ const enum NameSpace {
   User = 'USER'
 }
 
-export { APIRoute, AppRoute, AuthorizationStatus, CITIES, CitiesListItems, NameSpace, Pages, SortOptions, URL_MARKER_CURRENT, URL_MARKER_DEFAULT };
+export { APIRoute, AppRoute, AuthorizationStatus, CITIES, CitiesListItems, FavoriteStatus, NameSpace, Pages, RequestStatus, SortOptions, URL_MARKER_CURRENT, URL_MARKER_DEFAULT };

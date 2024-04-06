@@ -11,6 +11,7 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import { getOffersDataLoadingStatus } from '../../store/selectors/offers-selectors';
 import PrivateRoute from '../private-route/private-route';
+import PublicRoute from '../public-route/public-route';
 
 export default function App(): JSX.Element {
   const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
@@ -37,7 +38,11 @@ export default function App(): JSX.Element {
           />
           <Route
             path={AppRoute.Login}
-            element={<LoginPage />}
+            element={
+              <PublicRoute>
+                <LoginPage />
+              </PublicRoute>
+            }
           />
           <Route
             path={AppRoute.OfferId}

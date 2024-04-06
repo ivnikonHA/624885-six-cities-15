@@ -1,4 +1,4 @@
-import { AuthorizationStatus } from '../const';
+import { AuthorizationStatus, RequestStatus } from '../const';
 import { store } from '../store';
 import { CommentType } from './comments';
 import { CityType, FullOfferType, OfferType } from './offers';
@@ -6,9 +6,7 @@ import { UserData } from './user-data';
 
 export type FavoritesStateType = {
   favorites: OfferType[];
-  isLoading: boolean;
-  isSetting: boolean;
-  isError: boolean;
+  status: RequestStatus;
 }
 
 export type OffersStateType = {

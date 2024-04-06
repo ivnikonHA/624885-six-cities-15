@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 
 import App from './components/app/app';
 import { store } from './store';
-import { checkAuthAction, fetchFavorites, fetchOffersAction } from './store/api-actions';
+import { checkAuthAction, fetchOffersAction } from './store/api-actions';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,7 +12,6 @@ const root = ReactDOM.createRoot(
 
 store.dispatch(fetchOffersAction());
 store.dispatch(checkAuthAction());
-store.dispatch(fetchFavorites());
 
 root.render(
   <React.StrictMode>

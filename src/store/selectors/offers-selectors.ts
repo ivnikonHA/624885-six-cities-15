@@ -11,13 +11,13 @@ const getCurrentCity = (state: State): CityType =>
   state[NameSpace.Offers].currentCity;
 const getSortType = (state: State): string => state[NameSpace.Offers].sortType;
 const getFavorites = (state: State): OfferType[] => state[NameSpace.Favorites].favorites;
-const getIsFavoritesLoading = (state: State) => state[NameSpace.Favorites].isLoading;
+const getFavoritesStatus = (state: State) => state[NameSpace.Favorites].status;
 
 export {
   getActiveOffer,
   getCurrentCity,
   getFavorites,
-  getIsFavoritesLoading,
+  getFavoritesStatus,
   getOffers,
   getOffersDataLoadingStatus,
   getSortType,

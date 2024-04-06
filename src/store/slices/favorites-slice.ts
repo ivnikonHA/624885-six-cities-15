@@ -1,14 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { NameSpace } from '../../const';
+import { NameSpace, RequestStatus } from '../../const';
 import { FavoritesStateType } from '../../types/state';
-import { fetchFavorites, setFavoriteById } from '../api-actions';
+import { fetchFavorites, logoutAction, setFavoriteById } from '../api-actions';
 
 const initialState: FavoritesStateType = {
   favorites: [],
-  isLoading: false,
-  isSetting: false,
-  isError: false
+  status: RequestStatus.Idle
 };
 
 const favoritesSlice = createSlice({
@@ -19,14 +17,13 @@ const favoritesSlice = createSlice({
     builder
       .addCase(fetchFavorites.fulfilled, (state, action) => {
         state.favorites = action.payload;
-        state.isLoading = false;
-        state.isError = false;
+        state.status = RequestStatus.Success;
       })
       .addCase(fetchFavorites.pending, (state) => {
-        state.isLoading = true;
+        state.status = RequestStatus.Loading;
       })
       .addCase(fetchFavorites.rejected, (state) => {
-        state.isError = true;
+        state.status = RequestStatus.Failed;
       })
       .addCase(setFavoriteById.fulfilled, (state, action) => {
         if(action.payload.isFavorite) {
@@ -35,11 +32,8 @@ const favoritesSlice = createSlice({
           state.favorites = state.favorites.filter((item) => item.id !== action.payload.id);
         }
       })
-      .addCase(setFavoriteById.pending, (state) => {
-        state.isSetting = true;
-      })
-      .addCase(setFavoriteById.rejected, (state) => {
-        state.isError = true;
+      .addCase(logoutAction.fulfilled, (state) => {
+        state.favorites = [];
       });
   },
 });

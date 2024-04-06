@@ -1,24 +1,17 @@
 import cn from 'classnames';
-import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { RequestStatus } from '../../const';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { fetchFavorites } from '../../store/api-actions';
-import { getFavorites, getIsFavoritesLoading } from '../../store/selectors/offers-selectors';
+import { getFavorites, getFavoritesStatus } from '../../store/selectors/offers-selectors';
 
 export default function FavoritesPage(): JSX.Element {
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(fetchFavorites());
-  },[dispatch]
-  );
   const offers = useAppSelector(getFavorites);
-  const isLoading = useAppSelector(getIsFavoritesLoading);
+  const isLoading = useAppSelector(getFavoritesStatus) === RequestStatus.Loading;
   const favoritesEmpty = offers.length === 0 && !isLoading;
 
   return (
