@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { CITIES, NameSpace, SortOptions } from '../../const';
+import { CITIES, NameSpace, RequestStatus, SortOptions } from '../../const';
 import { CityType } from '../../types/offers';
 import { OffersStateType } from '../../types/state';
 import { fetchOffersAction, setFavoriteById } from '../api-actions';
@@ -10,7 +10,7 @@ const initialState: OffersStateType = {
   offers: [],
   activeOffer: undefined,
   sortType: SortOptions.POPULAR,
-  isOffersDataLoading: false,
+  status: RequestStatus.Idle,
 };
 
 const offersSlice = createSlice({
@@ -31,10 +31,10 @@ const offersSlice = createSlice({
     builder
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.offers = action.payload;
-        state.isOffersDataLoading = false;
+        state.status = RequestStatus.Success;
       })
       .addCase(fetchOffersAction.pending, (state) => {
-        state.isOffersDataLoading = true;
+        state.status = RequestStatus.Loading;
       })
       .addCase(setFavoriteById.fulfilled, (state, action) => {
         const offerToChange = action.payload;

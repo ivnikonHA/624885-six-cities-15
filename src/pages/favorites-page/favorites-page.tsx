@@ -13,7 +13,6 @@ export default function FavoritesPage(): JSX.Element {
   const offers = useAppSelector(getFavorites);
   const isLoading = useAppSelector(getFavoritesStatus) === RequestStatus.Loading;
   const favoritesEmpty = offers.length === 0 && !isLoading;
-
   return (
     <div className={cn('page', {'page--favorites-empty': favoritesEmpty})}>
       <Helmet>

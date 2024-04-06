@@ -14,7 +14,7 @@ export type OffersStateType = {
   offers: OfferType[];
   activeOffer?: string;
   sortType: string;
-  isOffersDataLoading: boolean;
+  status: RequestStatus;
 }
 
 export type OfferStateType = {
