@@ -1,5 +1,6 @@
-import classNames from 'classnames';
+import cn from 'classnames';
 import { memo } from 'react';
+import { Link } from 'react-router-dom';
 
 import { CITIES } from '../../const';
 import { CitiesListItems } from '../../const';
@@ -16,11 +17,11 @@ function CitiesList(): JSX.Element {
     <ul className="locations__list tabs__list">
       {citiesNamesList.map((item) => (
         <li key={item} className="locations__item">
-          <a
-            className={classNames('locations__item-link', 'tabs__item', {
+          <Link
+            className={cn('locations__item-link', 'tabs__item', {
               'tabs__item--active': item === currentCity.name,
             })}
-            href="#"
+            to=''
             onClick={() =>
               dispatch(
                 changeCurrentCity({
@@ -29,7 +30,7 @@ function CitiesList(): JSX.Element {
               )}
           >
             <span>{item}</span>
-          </a>
+          </Link>
         </li>
       ))}
     </ul>

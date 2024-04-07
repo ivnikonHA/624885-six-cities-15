@@ -80,7 +80,9 @@ const enum APIRoute {
   Nearby = '/offers/:id/nearby',
   Login = '/login',
   Logout = '/logout',
-  Reviews = '/comments/:id'
+  Reviews = '/comments/:id',
+  Favorites = '/favorite',
+  FavoriteById = '/favorite/:id/:status'
 }
 
 const enum AuthorizationStatus {
@@ -89,20 +91,52 @@ const enum AuthorizationStatus {
   Unknown = 'UNKNOWN'
 }
 
+const enum FavoriteStatus {
+  Added = 1,
+  Removed = 0
+}
+
+const enum RequestStatus {
+  Idle,
+  Loading,
+  Success,
+  Failed
+}
+
 const enum Pages {
   Main = 'cities',
   Favorites = 'favorites',
-  Offer = 'near-places'
+  Offer = 'near-places',
 }
 
 const URL_MARKER_DEFAULT = './img/pin.svg';
 const URL_MARKER_CURRENT = './img/pin-active.svg';
 
 const enum NameSpace {
+  Favorites = 'FAVORITES',
   Offers = 'OFFERS',
   Offer = 'OFFER',
   Reviews = 'REVIEWS',
   User = 'USER'
 }
 
-export { APIRoute, AppRoute, AuthorizationStatus, CITIES, CitiesListItems, NameSpace, Pages, SortOptions, URL_MARKER_CURRENT, URL_MARKER_DEFAULT };
+const enum OfferPageCounts {
+  Start = 0,
+  Reviews = 10,
+  Nearby = 3,
+  Images = 6
+}
+
+export { APIRoute,
+  AppRoute,
+  AuthorizationStatus,
+  CITIES,
+  CitiesListItems,
+  FavoriteStatus,
+  NameSpace,
+  OfferPageCounts,
+  Pages,
+  RequestStatus,
+  SortOptions,
+  URL_MARKER_CURRENT,
+  URL_MARKER_DEFAULT };

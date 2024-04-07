@@ -30,11 +30,13 @@ function FavoritesListItem({ offers, currentCity }: FavoritesListItemProps) {
     </li>);
 }
 
+const favoritesOffers = (offers: OfferType[], city: string) => offers.filter((offer) => offer.city.name === city);
+
 export default function FavoritesList({ offers }: FavoritesListProps): JSX.Element {
   return (
     <>
       {Object.values(CitiesListItems).map((city) => (
-        <FavoritesListItem key={city} offers={offers.filter((offer) => offer.city.name === city)} currentCity={city} />
+        <FavoritesListItem key={city} offers={favoritesOffers(offers, city)} currentCity={city} />
       ))}
     </>
   );

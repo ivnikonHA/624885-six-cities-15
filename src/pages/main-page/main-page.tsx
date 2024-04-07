@@ -1,9 +1,11 @@
+import cn from 'classnames';
 import { useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 import CardsSection from '../../components/cards-section/cards-section';
 import CitiesList from '../../components/cities-list/cities-list';
 import Header from '../../components/header/header';
+import MainEmpty from '../../components/main-empty/main-empty';
 import Map from '../../components/map/map';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { getActiveOffer, getCurrentCity, getOffers } from '../../store/selectors/offers-selectors';
@@ -21,7 +23,7 @@ function MainPage(): JSX.Element {
         <title>6 Cities</title>
       </Helmet>
       <Header />
-      <main className="page__main page__main--index">
+      <main className={cn('page__main page__main--index', {'page__main--index-empty': filteredOffers.length === 0})}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
@@ -29,20 +31,22 @@ function MainPage(): JSX.Element {
           </section>
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
-            <CardsSection
-              offers={filteredOffers}
-              currentCity={currentCity.name}
-            />
-            <div className="cities__right-section">
-              <Map
-                city={currentCity}
+          {filteredOffers.length === 0 ? <MainEmpty />
+            :
+            <div className="cities__places-container container">
+              <CardsSection
                 offers={filteredOffers}
-                selectedOffer={activeOffer}
-                page='cities'
+                currentCity={currentCity.name}
               />
-            </div>
-          </div>
+              <div className="cities__right-section">
+                <Map
+                  city={currentCity}
+                  offers={filteredOffers}
+                  selectedOffer={activeOffer}
+                  page='cities'
+                />
+              </div>
+            </div>}
         </div>
       </main>
     </div>

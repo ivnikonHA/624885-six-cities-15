@@ -5,11 +5,11 @@ import { useEffect, useRef } from 'react';
 
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
 import useMap from '../../hooks/useMap';
-import { CityType, OfferType } from '../../types/offers';
+import { CityType, MapOffer } from '../../types/offers';
 
 type MapProps = {
   city: CityType;
-  offers: OfferType[];
+  offers: MapOffer[];
   selectedOffer: string | undefined;
   page: string;
 };
@@ -40,6 +40,7 @@ export default function Map({ city, offers, selectedOffer, page }: MapProps): JS
   }, [city, map]);
 
   useEffect(() => {
+    markerLayer.current.clearLayers();
     if (map) {
       offers.forEach((offer): void => {
         leaflet.marker(
@@ -52,7 +53,7 @@ export default function Map({ city, offers, selectedOffer, page }: MapProps): JS
           .addTo(markerLayer.current);
       });
     }
-  });
+  }, [selectedOffer, map, offers]);
 
   return <section className={`${page}__map map`} ref={mapRef}></section>;
 }

@@ -4,6 +4,7 @@ import { getToken } from './token';
 
 const BACKEND_URL = 'https://15.design.htmlacademy.pro/six-cities';
 const REQUEST_TIMEOUT = 5000;
+const TOKEN_HEADER = 'X-Token';
 
 export const createAPI = (): AxiosInstance => {
   const api = axios.create({
@@ -16,7 +17,7 @@ export const createAPI = (): AxiosInstance => {
       const token = getToken();
 
       if (token && config.headers) {
-        config.headers['X-Token'] = token;
+        config.headers[TOKEN_HEADER] = token;
       }
       return config;
     },

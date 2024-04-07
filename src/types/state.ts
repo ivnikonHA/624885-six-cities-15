@@ -1,15 +1,20 @@
-import { AuthorizationStatus } from '../const';
+import { AuthorizationStatus, RequestStatus } from '../const';
 import { store } from '../store';
 import { CommentType } from './comments';
 import { CityType, FullOfferType, OfferType } from './offers';
 import { UserData } from './user-data';
+
+export type FavoritesStateType = {
+  favorites: OfferType[];
+  status: RequestStatus;
+}
 
 export type OffersStateType = {
   currentCity: CityType;
   offers: OfferType[];
   activeOffer?: string;
   sortType: string;
-  isOffersDataLoading: boolean;
+  status: RequestStatus;
 }
 
 export type OfferStateType = {
@@ -19,7 +24,9 @@ export type OfferStateType = {
 }
 
 export type ReviewsStateType = {
-  reviews: CommentType[] | null;
+  reviews: CommentType[];
+  isReviewPosting: boolean;
+  isReviewsLoading: boolean;
 }
 
 export type UserState = {

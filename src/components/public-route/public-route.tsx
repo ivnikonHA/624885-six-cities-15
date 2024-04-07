@@ -5,20 +5,18 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import LoadingPage from '../../pages/loading-page/loading-page';
 import { getAuthorizationStatus } from '../../store/selectors/user-selectors';
 
-type PrivateRouteProps = {
+type PublicRouteProps = {
   children: JSX.Element;
 };
 
-export default function PrivateRoute({
-  children,
-}: PrivateRouteProps): JSX.Element {
+export default function PublicRoute({children}: PublicRouteProps): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   if(authorizationStatus === AuthorizationStatus.Unknown) {
     return <LoadingPage />;
   }
-  return authorizationStatus === AuthorizationStatus.Auth ? (
+  return authorizationStatus === AuthorizationStatus.NoAuth ? (
     children
   ) : (
-    <Navigate to={AppRoute.Login} />
+    <Navigate to={AppRoute.Root} />
   );
 }

@@ -1,23 +1,24 @@
 import cn from 'classnames';
+import dayjs from 'dayjs';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 
 import CardsList from '../../components/cards-list/cards-list';
+import FavoriteButton from '../../components/favorite-button/favorite-button';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import ReviewForm from '../../components/review-form/review-form';
 import ReviewsItems from '../../components/reviews-items/reviews-items';
 import Stars from '../../components/stars/stars';
-import { AuthorizationStatus, Pages } from '../../const';
+import { AuthorizationStatus, OfferPageCounts, Pages } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { COMMENTS } from '../../mocks/comments-mock';
 import { fetchNearbyOffers, fetchOfferByIdAction, fetchReviews } from '../../store/api-actions';
-import { getCurrentOffer, getNearbyOffers } from '../../store/selectors/offer-selectors';
-import { getOffers } from '../../store/selectors/offers-selectors';
+import { getCurrentOffer, getNearbyOffers, getOfferDataLoadingStatus } from '../../store/selectors/offer-selectors';
 import { getReviews } from '../../store/selectors/reviews-selectors';
 import { getAuthorizationStatus } from '../../store/selectors/user-selectors';
+import LoadingPage from '../loading-page/loading-page';
 import NotFoundPage from '../not-found-page/not-found-page';
 
 export default function OfferPage(): JSX.Element {
@@ -34,17 +35,19 @@ export default function OfferPage(): JSX.Element {
   }, [id, dispatch]);
 
   const currentOffer = useAppSelector(getCurrentOffer);
-  const nearbyOffers = useAppSelector(getNearbyOffers);
-  const offers = useAppSelector(getOffers);
+  const nearbyOffers = useAppSelector(getNearbyOffers)
+    .slice(OfferPageCounts.Start, OfferPageCounts.Nearby);
   const reviews = useAppSelector(getReviews);
-  const selectedOffer = offers.find((item) => item.id === id);
-  const nearbyOffersForMap = selectedOffer ?
-    [...nearbyOffers, selectedOffer]
-    : nearbyOffers;
+  const isOffersDataLoading = useAppSelector(getOfferDataLoadingStatus);
+
+  if(isOffersDataLoading) {
+    return <LoadingPage />;
+  }
 
   if (!currentOffer) {
     return <NotFoundPage />;
   }
+
   const {
     title,
     type,
@@ -60,17 +63,23 @@ export default function OfferPage(): JSX.Element {
     images,
     maxAdults
   } = currentOffer;
+  const nearbyOffersForMap = [...nearbyOffers, currentOffer];
+
+  const imagesSliced = images.slice(OfferPageCounts.Start, OfferPageCounts.Images);
+  const reviewsSorted = reviews
+    .toSorted((firstItem, secondItem) => dayjs(secondItem.date).diff(firstItem.date))
+    .slice(OfferPageCounts.Start, OfferPageCounts.Reviews);
   return (
     <div className="page">
       <Helmet>
         <title>6 Cities : Offer page</title>
       </Helmet>
-      <Header></Header>
+      <Header />
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              {images.map((item) => (
+              {imagesSliced.map((item) => (
                 <div key={item} className="offer__image-wrapper">
                   <img className="offer__image" src={item} alt="Photo studio" />
                 </div>
@@ -87,16 +96,7 @@ export default function OfferPage(): JSX.Element {
                 <h1 className="offer__name">
                   {title}
                 </h1>
-                <button className={
-                  cn('offer__bookmark-button', 'button',
-                    {'offer__bookmark-button--active': isFavorite})
-                } type="button"
-                >
-                  <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                {id && <FavoriteButton page={'offer'} isFavorite={isFavorite} offerId={id} />}
               </div>
               <Stars rating={rating} page='offer' />
               <ul className="offer__features">
@@ -138,9 +138,7 @@ export default function OfferPage(): JSX.Element {
                   <span className="offer__user-name">
                     {host.name}
                   </span>
-                  <span className="offer__user-status">
-                    {host.isPro && 'Pro'}
-                  </span>
+                  {host.isPro && <span className="offer__user-status">Pro</span>}
                 </div>
                 <div className="offer__description">
                   <p className="offer__text">
@@ -149,9 +147,9 @@ export default function OfferPage(): JSX.Element {
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{COMMENTS.length}</span></h2>
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                 <ul className="reviews__list">
-                  {reviews && <ReviewsItems comments={reviews} />}
+                  {reviews && <ReviewsItems comments={reviewsSorted} />}
                 </ul>
                 {isAuthorized && <ReviewForm />}
               </section>

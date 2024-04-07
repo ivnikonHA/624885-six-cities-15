@@ -4,6 +4,8 @@ import { UserData } from '../../types/user-data';
 
 const getAuthorizationStatus = (state: State): AuthorizationStatus =>
   state[NameSpace.User].authorizationStatus;
+const getIsAuthorized = (state: State): boolean =>
+  state[NameSpace.User].authorizationStatus === AuthorizationStatus.Auth;
 const getUserData = (state: State): UserData => state[NameSpace.User].userData;
 
-export { getAuthorizationStatus, getUserData };
+export { getAuthorizationStatus, getIsAuthorized, getUserData };

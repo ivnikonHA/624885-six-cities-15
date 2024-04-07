@@ -1,13 +1,11 @@
 import { FormEvent, ReactEventHandler, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Navigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import Header from '../../components/header/header';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import RandomCityButton from '../../components/random-city-button/random-city-button';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { useAppSelector } from '../../hooks/useAppSelector';
 import { loginAction } from '../../store/api-actions';
-import { getAuthorizationStatus } from '../../store/selectors/user-selectors';
 import { AuthData } from '../../types/auth-data';
 
 type ChangeHandler = ReactEventHandler<HTMLInputElement>;
@@ -28,13 +26,14 @@ export default function LoginPage(): JSX.Element {
       login: formData.email,
       password: formData.password
     };
-    dispatch(loginAction(authData));
+    toast.promise(
+      dispatch(loginAction(authData)).unwrap(),
+      {
+        pending: 'Logging in',
+        error: 'Error to login'
+      }
+    );
   };
-
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  if (authorizationStatus === AuthorizationStatus.Auth) {
-    return <Navigate to={AppRoute.Root} />;
-  }
 
   return (
     <div className="page page--gray page--login">
@@ -68,6 +67,7 @@ export default function LoginPage(): JSX.Element {
                   name="password"
                   placeholder="Password"
                   value={formData.password}
+                  pattern="^(?=.*[a-zA-Z])(?=.*\d).+$"
                   required
                 />
               </div>
@@ -81,9 +81,7 @@ export default function LoginPage(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <RandomCityButton />
             </div>
           </section>
         </div>

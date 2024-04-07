@@ -20,6 +20,8 @@ type FullOfferType = Omit<OfferType, 'previewImage'> & {
   maxAdults: number;
 }
 
+type MapOffer = Pick<OfferType, 'city' | 'id' | 'location'>
+
 type HostType = {
   name: string;
   avatarUrl: string;
@@ -37,4 +39,4 @@ type LocationType = {
   zoom: number;
 };
 
-export type {CityType,FullOfferType, HostType,LocationType, OfferType};
+export type {CityType,FullOfferType, HostType,LocationType, MapOffer, OfferType};

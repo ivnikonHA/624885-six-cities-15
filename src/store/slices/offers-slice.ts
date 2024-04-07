@@ -1,16 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
-import { CITIES, NameSpace, SortOptions } from '../../const';
+import { CITIES, NameSpace, RequestStatus, SortOptions } from '../../const';
 import { CityType } from '../../types/offers';
 import { OffersStateType } from '../../types/state';
-import { fetchOffersAction } from '../api-actions';
+import { fetchOffersAction, loginAction, logoutAction, setFavoriteById } from '../api-actions';
 
 const initialState: OffersStateType = {
   currentCity: CITIES[0],
   offers: [],
   activeOffer: undefined,
   sortType: SortOptions.POPULAR,
-  isOffersDataLoading: false,
+  status: RequestStatus.Idle,
 };
 
 const offersSlice = createSlice({
@@ -31,10 +32,30 @@ const offersSlice = createSlice({
     builder
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.offers = action.payload;
-        state.isOffersDataLoading = false;
+        state.status = RequestStatus.Success;
       })
       .addCase(fetchOffersAction.pending, (state) => {
-        state.isOffersDataLoading = true;
+        state.status = RequestStatus.Loading;
+      })
+      .addCase(fetchOffersAction.rejected, () => {
+        toast.error('Error loading offers data');
+      })
+      .addCase(setFavoriteById.fulfilled, (state, action) => {
+        const offerToChange = action.payload;
+        const foundOffer = state.offers.find((item) => item.id === offerToChange.id);
+        if(foundOffer) {
+          foundOffer.isFavorite = offerToChange.isFavorite;
+        }
+      })
+      .addCase(loginAction.fulfilled, (state) => {
+        if(state.status !== RequestStatus.Idle) {
+          state.status = RequestStatus.Idle;
+        }
+      })
+      .addCase(logoutAction.fulfilled, (state) => {
+        if(state.status !== RequestStatus.Idle) {
+          state.status = RequestStatus.Idle;
+        }
       });
   },
 });
