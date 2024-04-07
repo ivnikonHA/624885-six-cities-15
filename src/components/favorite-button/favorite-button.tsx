@@ -22,12 +22,9 @@ function FavoriteButtonComponent({page, offerId, isFavorite}: FavoriteButtonProp
     {[`${page}__bookmark-button--active`]: isSet}
   );
   const buttonDimensions = {
-    width: '18', height: '19'
+    'place-card': {width: '18', height: '19'},
+    'offer':  {width: '31', height: '32'},
   };
-  if(page === 'offer') {
-    buttonDimensions.width = '31';
-    buttonDimensions.height = '32';
-  }
   const dispatch = useAppDispatch();
   const isAuthorized = useAppSelector(getIsAuthorized);
 
@@ -46,7 +43,11 @@ function FavoriteButtonComponent({page, offerId, isFavorite}: FavoriteButtonProp
       className={buttonClass}
       type="button"
     >
-      <svg className={`${page}__bookmark-icon`} width={buttonDimensions.width} height={buttonDimensions.height}>
+      <svg
+        className={`${page}__bookmark-icon`}
+        width={buttonDimensions[page].width}
+        height={buttonDimensions[page].height}
+      >
         <use xlinkHref="#icon-bookmark"></use>
       </svg>
       <span className="visually-hidden">To bookmarks</span>
