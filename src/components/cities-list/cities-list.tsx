@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import { memo } from 'react';
+import { Link } from 'react-router-dom';
 
 import { CITIES } from '../../const';
 import { CitiesListItems } from '../../const';
@@ -7,7 +8,6 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { getCurrentCity } from '../../store/selectors/offers-selectors';
 import { changeCurrentCity } from '../../store/slices/offers-slice';
-import { Link } from 'react-router-dom';
 
 function CitiesList(): JSX.Element {
   const citiesNamesList = Object.values(CitiesListItems);
