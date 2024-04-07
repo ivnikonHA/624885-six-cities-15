@@ -19,7 +19,14 @@ export function LoggedNavigation() {
           to={AppRoute.Favorites}
           className="header__nav-link header__nav-link--profile"
         >
-          <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+          <div
+            className="header__avatar-wrapper user__avatar-wrapper"
+            style={{
+              backgroundImage: `url(${userData.avatarUrl})`,
+              borderRadius: '50%'
+            }}
+          >
+          </div>
           <span className="header__user-name user__name">
             {userData.email}
           </span>

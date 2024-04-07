@@ -25,9 +25,7 @@ export default function LoginPage(): JSX.Element {
       login: formData.email,
       password: formData.password
     };
-    if(authData.password.length > 1) {
-      dispatch(loginAction(authData));
-    }
+    dispatch(loginAction(authData));
   };
 
   return (
@@ -62,6 +60,7 @@ export default function LoginPage(): JSX.Element {
                   name="password"
                   placeholder="Password"
                   value={formData.password}
+                  pattern="^(?=.*[a-zA-Z])(?=.*\d).+$"
                   required
                 />
               </div>

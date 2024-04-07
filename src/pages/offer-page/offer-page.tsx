@@ -11,7 +11,7 @@ import Map from '../../components/map/map';
 import ReviewForm from '../../components/review-form/review-form';
 import ReviewsItems from '../../components/reviews-items/reviews-items';
 import Stars from '../../components/stars/stars';
-import { AuthorizationStatus, Pages } from '../../const';
+import { AuthorizationStatus, OfferPageCounts, Pages } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { fetchNearbyOffers, fetchOfferByIdAction, fetchReviews } from '../../store/api-actions';
@@ -35,7 +35,8 @@ export default function OfferPage(): JSX.Element {
   }, [id, dispatch]);
 
   const currentOffer = useAppSelector(getCurrentOffer);
-  const nearbyOffers = useAppSelector(getNearbyOffers).slice(0,3);
+  const nearbyOffers = useAppSelector(getNearbyOffers)
+    .slice(OfferPageCounts.Start, OfferPageCounts.Nearby);
   const reviews = useAppSelector(getReviews);
 
   if (!currentOffer) {
@@ -65,7 +66,10 @@ export default function OfferPage(): JSX.Element {
       [...nearbyOffers, selectedOffer]
       : nearbyOffers;
   }
-  const imagesSliced = images.slice(0,6);
+  const imagesSliced = images.slice(OfferPageCounts.Start, OfferPageCounts.Images);
+  const reviewsSorted = reviews
+    .toSorted((firstItem, secondItem) => dayjs(secondItem.date).diff(firstItem.date))
+    .slice(OfferPageCounts.Start, OfferPageCounts.Reviews);
   return (
     <div className="page">
       <Helmet>
@@ -146,7 +150,7 @@ export default function OfferPage(): JSX.Element {
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                 <ul className="reviews__list">
-                  {reviews && <ReviewsItems comments={reviews.toSorted((firstItem, secondItem) => dayjs(secondItem.date).diff(firstItem.date)).slice(0, 10)} />}
+                  {reviews && <ReviewsItems comments={reviewsSorted} />}
                 </ul>
                 {isAuthorized && <ReviewForm />}
               </section>

@@ -106,7 +106,7 @@ const enum RequestStatus {
 const enum Pages {
   Main = 'cities',
   Favorites = 'favorites',
-  Offer = 'near-places'
+  Offer = 'near-places',
 }
 
 const URL_MARKER_DEFAULT = './img/pin.svg';
@@ -120,4 +120,23 @@ const enum NameSpace {
   User = 'USER'
 }
 
-export { APIRoute, AppRoute, AuthorizationStatus, CITIES, CitiesListItems, FavoriteStatus, NameSpace, Pages, RequestStatus, SortOptions, URL_MARKER_CURRENT, URL_MARKER_DEFAULT };
+const enum OfferPageCounts {
+  Start = 0,
+  Reviews = 10,
+  Nearby = 3,
+  Images = 6
+}
+
+export { APIRoute,
+  AppRoute,
+  AuthorizationStatus,
+  CITIES,
+  CitiesListItems,
+  FavoriteStatus,
+  NameSpace,
+  OfferPageCounts,
+  Pages,
+  RequestStatus,
+  SortOptions,
+  URL_MARKER_CURRENT,
+  URL_MARKER_DEFAULT };
