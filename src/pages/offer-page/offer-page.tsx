@@ -15,10 +15,10 @@ import { AuthorizationStatus, OfferPageCounts, Pages } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { fetchNearbyOffers, fetchOfferByIdAction, fetchReviews } from '../../store/api-actions';
-import { getCurrentOffer, getNearbyOffers } from '../../store/selectors/offer-selectors';
+import { getCurrentOffer, getNearbyOffers, getOfferDataLoadingStatus } from '../../store/selectors/offer-selectors';
 import { getReviews } from '../../store/selectors/reviews-selectors';
 import { getAuthorizationStatus } from '../../store/selectors/user-selectors';
-import { OfferType } from '../../types/offers';
+import LoadingPage from '../loading-page/loading-page';
 import NotFoundPage from '../not-found-page/not-found-page';
 
 export default function OfferPage(): JSX.Element {
@@ -38,10 +38,16 @@ export default function OfferPage(): JSX.Element {
   const nearbyOffers = useAppSelector(getNearbyOffers)
     .slice(OfferPageCounts.Start, OfferPageCounts.Nearby);
   const reviews = useAppSelector(getReviews);
+  const isOffersDataLoading = useAppSelector(getOfferDataLoadingStatus);
+
+  if(isOffersDataLoading) {
+    return <LoadingPage />;
+  }
 
   if (!currentOffer) {
     return <NotFoundPage />;
   }
+
   const {
     title,
     type,
@@ -55,17 +61,10 @@ export default function OfferPage(): JSX.Element {
     goods,
     host,
     images,
-    maxAdults,
-    location
+    maxAdults
   } = currentOffer;
-  let selectedOffer: OfferType;
-  let nearbyOffersForMap: OfferType[] = [];
-  if(id) {
-    selectedOffer = {id, title, type, price, city, isFavorite, isPremium, rating, location, previewImage:''};
-    nearbyOffersForMap = selectedOffer ?
-      [...nearbyOffers, selectedOffer]
-      : nearbyOffers;
-  }
+  const nearbyOffersForMap = [...nearbyOffers, currentOffer];
+
   const imagesSliced = images.slice(OfferPageCounts.Start, OfferPageCounts.Images);
   const reviewsSorted = reviews
     .toSorted((firstItem, secondItem) => dayjs(secondItem.date).diff(firstItem.date))

@@ -5,11 +5,11 @@ import { useEffect, useRef } from 'react';
 
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
 import useMap from '../../hooks/useMap';
-import { CityType, OfferType } from '../../types/offers';
+import { CityType, MapOffer } from '../../types/offers';
 
 type MapProps = {
   city: CityType;
-  offers: OfferType[];
+  offers: MapOffer[];
   selectedOffer: string | undefined;
   page: string;
 };

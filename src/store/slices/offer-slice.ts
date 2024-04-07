@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 import { NameSpace } from '../../const';
 import { OfferStateType } from '../../types/state';
@@ -23,8 +24,15 @@ const offerSlice = createSlice({
       .addCase(fetchOfferByIdAction.pending, (state) => {
         state.isOfferDataLoading = true;
       })
+      .addCase(fetchOfferByIdAction.rejected, (state) => {
+        toast.error('Error loading offer data.');
+        state.isOfferDataLoading = false;
+      })
       .addCase(fetchNearbyOffers.fulfilled, (state, action) => {
         state.nearbyOffers = action.payload;
+      })
+      .addCase(fetchNearbyOffers.rejected, () => {
+        toast.error('Error loading nearby offers data.');
       })
       .addCase(setFavoriteById.fulfilled, (state, action) => {
         const { id, isFavorite } = action.payload;

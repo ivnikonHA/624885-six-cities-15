@@ -1,4 +1,5 @@
 import React, { FormEvent, ReactEventHandler, useRef, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
@@ -24,9 +25,10 @@ export default function ReviewForm(): JSX.Element {
   const handleFormSuccess = () => {
     formRef.current?.reset();
     setFormData({...formData, review: '' });
+    toast.success('Review published');
   };
   const handleFormError = () => {
-
+    toast.error('Error publishing review');
   };
 
   const handleFieldChange: ChangeHandler = (evt) => {
@@ -41,7 +43,10 @@ export default function ReviewForm(): JSX.Element {
         comment: formData.review,
         rating: Number(formData.rating)
       };
-      dispatch(postReviewAction(reviewMessage)).unwrap().then(handleFormSuccess).catch(handleFormError);
+      dispatch(postReviewAction(reviewMessage))
+        .unwrap()
+        .then(handleFormSuccess)
+        .catch(handleFormError);
     }
   };
 

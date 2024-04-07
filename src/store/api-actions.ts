@@ -14,7 +14,7 @@ const fetchOffersAction = createAsyncThunk<
   OfferType[],
   undefined,
   {extra: AxiosInstance}
->('fetchOffers', async (_arg, { extra: api }) => {
+>('offers/fetchOffers', async (_arg, { extra: api }) => {
   const { data } = await api.get<OfferType[]>(APIRoute.Offers);
   return data;
 });
@@ -23,7 +23,7 @@ const fetchOfferByIdAction = createAsyncThunk<
   FullOfferType,
   string,
   {extra: AxiosInstance}
->('fetchOfferById', async (id, {extra: api}) => {
+>('offer/fetchOfferById', async (id, {extra: api}) => {
   const { data } = await api.get<FullOfferType>(generatePath(APIRoute.Offer, {id}));
   return data;
 });
@@ -32,7 +32,7 @@ const fetchNearbyOffers = createAsyncThunk<
   OfferType[],
   string,
   {extra: AxiosInstance}
->('fetchNearbyOffers', async (id, {extra: api}) => {
+>('offer/fetchNearbyOffers', async (id, {extra: api}) => {
   const { data } = await api.get<OfferType[]>(generatePath(APIRoute.Nearby, {id}));
   return data;
 });
@@ -41,7 +41,7 @@ const fetchReviews = createAsyncThunk<
   CommentType[],
   string,
   {extra: AxiosInstance}
->('fetchReviews', async (id, {extra: api}) => {
+>('reviews/fetchReviews', async (id, {extra: api}) => {
   const { data } = await api.get<CommentType[]>(generatePath(APIRoute.Reviews, {id}));
   return data;
 });
@@ -50,7 +50,7 @@ const postReviewAction = createAsyncThunk<
   CommentType,
   ReviewType,
   {extra: AxiosInstance}
->('postReview', async (reviewMessage, {extra: api}) => {
+>('reviews/postReview', async (reviewMessage, {extra: api}) => {
   const { data } = await api.post<CommentType>(generatePath(APIRoute.Reviews, {id: reviewMessage.id}), { comment: reviewMessage.comment, rating: reviewMessage.rating});
   return data;
 });
@@ -59,7 +59,7 @@ const fetchFavorites = createAsyncThunk<
   OfferType[],
   undefined,
   {extra: AxiosInstance}
->('fetchFavorites', async (_arg, {extra: api}) => {
+>('favorites/fetchFavorites', async (_arg, {extra: api}) => {
   const { data } = await api.get<OfferType[]>(APIRoute.Favorites);
   return data;
 });
@@ -68,7 +68,7 @@ const setFavoriteById = createAsyncThunk<
   OfferType,
   FavoriteType,
   {extra: AxiosInstance}
->('setFavoriteById', async ({id, isFavorite}, {extra: api}) => {
+>('favorites/setFavoriteById', async ({id, isFavorite}, {extra: api}) => {
   const status = Number(isFavorite).toString();
   const { data } = await api.post<OfferType>(generatePath(APIRoute.FavoriteById, {id, status}), {});
   return data;
@@ -78,13 +78,13 @@ const checkAuthAction = createAsyncThunk<
   UserData,
   undefined,
   {extra: AxiosInstance}
->('checkAuth', async (_arg, { extra: api }) => {
+>('user/checkAuth', async (_arg, { extra: api }) => {
   const { data } = await api.get<UserData>(APIRoute.Login);
   return data;
 });
 
 const loginAction = createAsyncThunk<UserData, AuthData, {extra: AxiosInstance}>(
-  'login',
+  'user/login',
   async ({ login: email, password }, { extra: api }) => {
     const { data } = await api.post<UserData>(APIRoute.Login, { email, password });
     saveToken(data.token);
@@ -93,7 +93,7 @@ const loginAction = createAsyncThunk<UserData, AuthData, {extra: AxiosInstance}>
 );
 
 const logoutAction = createAsyncThunk<void, undefined, {extra: AxiosInstance}>(
-  'logout',
+  'user/logout',
   async (_arg, { extra: api }) => {
     await api.delete(APIRoute.Logout).then(dropToken);
   }

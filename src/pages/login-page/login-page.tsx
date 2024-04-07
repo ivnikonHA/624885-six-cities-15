@@ -1,5 +1,6 @@
 import { FormEvent, ReactEventHandler, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { toast } from 'react-toastify';
 
 import Header from '../../components/header/header';
 import RandomCityButton from '../../components/random-city-button/random-city-button';
@@ -25,7 +26,13 @@ export default function LoginPage(): JSX.Element {
       login: formData.email,
       password: formData.password
     };
-    dispatch(loginAction(authData));
+    toast.promise(
+      dispatch(loginAction(authData)).unwrap(),
+      {
+        pending: 'Logging in',
+        error: 'Error to login'
+      }
+    );
   };
 
   return (

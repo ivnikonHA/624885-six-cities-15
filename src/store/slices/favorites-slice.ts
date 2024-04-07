@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 import { NameSpace, RequestStatus } from '../../const';
 import { FavoritesStateType } from '../../types/state';
-import { fetchFavorites, logoutAction, setFavoriteById } from '../api-actions';
+import { fetchFavorites, loginAction, logoutAction, setFavoriteById } from '../api-actions';
 
 const initialState: FavoritesStateType = {
   favorites: [],
@@ -24,6 +25,7 @@ const favoritesSlice = createSlice({
       })
       .addCase(fetchFavorites.rejected, (state) => {
         state.status = RequestStatus.Failed;
+        toast.error('Error loading favorites offers.');
       })
       .addCase(setFavoriteById.fulfilled, (state, action) => {
         if(action.payload.isFavorite) {
@@ -32,9 +34,16 @@ const favoritesSlice = createSlice({
           state.favorites = state.favorites.filter((item) => item.id !== action.payload.id);
         }
       })
+      .addCase(setFavoriteById.rejected, () => {
+        toast.error('Error add to favorites.');
+      })
+      .addCase(loginAction.fulfilled, (state) => {
+        state.status = RequestStatus.Idle;
+      })
       .addCase(logoutAction.fulfilled, (state) => {
         state.favorites = [];
       });
+
   },
 });
 

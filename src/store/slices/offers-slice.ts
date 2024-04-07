@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 import { CITIES, NameSpace, RequestStatus, SortOptions } from '../../const';
 import { CityType } from '../../types/offers';
 import { OffersStateType } from '../../types/state';
-import { fetchOffersAction, setFavoriteById } from '../api-actions';
+import { fetchOffersAction, loginAction, logoutAction, setFavoriteById } from '../api-actions';
 
 const initialState: OffersStateType = {
   currentCity: CITIES[0],
@@ -36,11 +37,24 @@ const offersSlice = createSlice({
       .addCase(fetchOffersAction.pending, (state) => {
         state.status = RequestStatus.Loading;
       })
+      .addCase(fetchOffersAction.rejected, () => {
+        toast.error('Error loading offers data');
+      })
       .addCase(setFavoriteById.fulfilled, (state, action) => {
         const offerToChange = action.payload;
         const foundOffer = state.offers.find((item) => item.id === offerToChange.id);
         if(foundOffer) {
           foundOffer.isFavorite = offerToChange.isFavorite;
+        }
+      })
+      .addCase(loginAction.fulfilled, (state) => {
+        if(state.status !== RequestStatus.Idle) {
+          state.status = RequestStatus.Idle;
+        }
+      })
+      .addCase(logoutAction.fulfilled, (state) => {
+        if(state.status !== RequestStatus.Idle) {
+          state.status = RequestStatus.Idle;
         }
       });
   },
