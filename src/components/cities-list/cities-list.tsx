@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import cn from 'classnames';
 import { memo } from 'react';
 
 import { CITIES } from '../../const';
@@ -7,6 +7,7 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { getCurrentCity } from '../../store/selectors/offers-selectors';
 import { changeCurrentCity } from '../../store/slices/offers-slice';
+import { Link } from 'react-router-dom';
 
 function CitiesList(): JSX.Element {
   const citiesNamesList = Object.values(CitiesListItems);
@@ -16,11 +17,11 @@ function CitiesList(): JSX.Element {
     <ul className="locations__list tabs__list">
       {citiesNamesList.map((item) => (
         <li key={item} className="locations__item">
-          <a
-            className={classNames('locations__item-link', 'tabs__item', {
+          <Link
+            className={cn('locations__item-link', 'tabs__item', {
               'tabs__item--active': item === currentCity.name,
             })}
-            href="#"
+            to=''
             onClick={() =>
               dispatch(
                 changeCurrentCity({
@@ -29,7 +30,7 @@ function CitiesList(): JSX.Element {
               )}
           >
             <span>{item}</span>
-          </a>
+          </Link>
         </li>
       ))}
     </ul>

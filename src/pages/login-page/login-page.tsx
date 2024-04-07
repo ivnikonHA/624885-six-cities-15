@@ -2,6 +2,7 @@ import { FormEvent, ReactEventHandler, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 import Header from '../../components/header/header';
+import RandomCityButton from '../../components/random-city-button/random-city-button';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { loginAction } from '../../store/api-actions';
 import { AuthData } from '../../types/auth-data';
@@ -74,9 +75,7 @@ export default function LoginPage(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <RandomCityButton />
             </div>
           </section>
         </div>
