@@ -6,7 +6,7 @@ import FavoritesList from '../../components/favorites-list/favorites-list';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import { RequestStatus } from '../../const';
-import { useAppSelector } from '../../hooks/useAppSelector';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { getFavorites, getFavoritesStatus } from '../../store/selectors/offers-selectors';
 
 export default function FavoritesPage(): JSX.Element {

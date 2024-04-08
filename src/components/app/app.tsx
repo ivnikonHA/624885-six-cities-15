@@ -2,7 +2,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { createBrowserRouter, createRoutesFromElements,Route, RouterProvider } from 'react-router-dom';
 
 import { AppRoute, RequestStatus } from '../../const';
-import { useAppSelector } from '../../hooks/useAppSelector';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import LoadingPage from '../../pages/loading-page/loading-page';
 import LoginPage from '../../pages/login-page/login-page';

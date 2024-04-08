@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import { AppRoute, CITIES } from '../../const';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { changeCurrentCity } from '../../store/slices/offers-slice';
 import { getRandomNumber } from '../../utils';
 

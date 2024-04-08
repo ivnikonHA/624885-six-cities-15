@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom';
 
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { useAppSelector } from '../../hooks/useAppSelector';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import LoadingPage from '../../pages/loading-page/loading-page';
 import { getAuthorizationStatus } from '../../store/selectors/user-selectors';
 

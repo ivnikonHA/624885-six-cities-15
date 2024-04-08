@@ -7,7 +7,7 @@ import CitiesList from '../../components/cities-list/cities-list';
 import Header from '../../components/header/header';
 import MainEmpty from '../../components/main-empty/main-empty';
 import Map from '../../components/map/map';
-import { useAppSelector } from '../../hooks/useAppSelector';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { getActiveOffer, getCurrentCity, getOffers } from '../../store/selectors/offers-selectors';
 
 function MainPage(): JSX.Element {

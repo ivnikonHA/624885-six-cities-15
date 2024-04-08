@@ -67,6 +67,8 @@ const CITIES: CityType[] = [
   }
 ];
 
+const DEFAULT_CITY = CITIES[0];
+
 const enum AppRoute {
   Root = '/',
   Login = '/login',
@@ -132,6 +134,7 @@ export { APIRoute,
   AuthorizationStatus,
   CITIES,
   CitiesListItems,
+  DEFAULT_CITY,
   FavoriteStatus,
   NameSpace,
   OfferPageCounts,

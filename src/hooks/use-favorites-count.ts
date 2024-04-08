@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
 import { fetchFavorites } from '../store/api-actions';
-import { useAppDispatch } from './useAppDispatch';
-import { useFavorites } from './useFavorites';
+import { useAppDispatch } from './use-app-dispatch';
+import { useFavorites } from './use-favorites';
 
 export function useFavoriteCount() {
   const { count, isIdle } = useFavorites();

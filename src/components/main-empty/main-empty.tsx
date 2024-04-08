@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../hooks/useAppSelector';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { getCurrentCity } from '../../store/selectors/offers-selectors';
 
 function MainEmpty(): JSX.Element {

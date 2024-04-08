@@ -4,10 +4,10 @@ import Card from '../card/card';
 type CardsListProps = {
   offers: OfferType[];
   page: string;
-  handler?: (offer: OfferType | null) => void;
+  onCardHover?: (offer: OfferType | null) => void;
 }
 
-export default function CardsList({ offers, page, handler }: CardsListProps): JSX.Element {
+export default function CardsList({ offers, page, onCardHover }: CardsListProps): JSX.Element {
   return (
     <>
       {offers.map((offer) => (
@@ -15,7 +15,7 @@ export default function CardsList({ offers, page, handler }: CardsListProps): JS
           key={offer.id}
           offer={offer}
           page={page}
-          handler={handler}
+          onCardHover={onCardHover}
         />
       ))}
     </>

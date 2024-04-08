@@ -1,14 +1,22 @@
 import React, { FormEvent, ReactEventHandler, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { useAppSelector } from '../../hooks/useAppSelector';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { postReviewAction } from '../../store/api-actions';
 import { getCurrentOffer } from '../../store/selectors/offer-selectors';
 import { getIsReviewPosting } from '../../store/selectors/reviews-selectors';
 import { ReviewType } from '../../types/comments';
 
 type ChangeHandler = ReactEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+
+const ratings = [
+  { stars: '5', title: 'perfect' },
+  { stars: '4', title: 'good' },
+  { stars: '3', title: 'not bad' },
+  { stars: '2', title: 'badly' },
+  { stars: '1', title: 'terribly' },
+];
 
 export default function ReviewForm(): JSX.Element {
   const [formData, setFormData] = useState({
@@ -50,13 +58,6 @@ export default function ReviewForm(): JSX.Element {
     }
   };
 
-  const ratings = [
-    { stars: '5', title: 'perfect' },
-    { stars: '4', title: 'good' },
-    { stars: '3', title: 'not bad' },
-    { stars: '2', title: 'badly' },
-    { stars: '1', title: 'terribly' },
-  ];
   const disableSubmitButton = formData.review.length > 300 || formData.review.length < 50 || formData.rating === '' || isReviewPosting;
   return (
     <form onSubmit={handleSubmitForm} className="reviews__form form" action="#" method="post" ref={formRef}>

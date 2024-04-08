@@ -8,27 +8,27 @@ import Stars from '../stars/stars';
 type CardProps = {
   offer: OfferType;
   page: string;
-  handler?: (offer: OfferType | null) => void;
+  onCardHover?: (offer: OfferType | null) => void;
 }
 
-export default function Card({ offer, page, handler }: CardProps): JSX.Element {
+export default function Card({ offer, page, onCardHover }: CardProps): JSX.Element {
   const { id, title, type, price, isFavorite, isPremium, previewImage, rating } = offer;
-  const handlerCardMouseEnter = () => {
-    if (handler) {
-      return handler(offer);
+  const handleMouseEnter = () => {
+    if (onCardHover) {
+      return onCardHover(offer);
     }
   };
-  const handlerCardMouseLeave = () => {
-    if (handler) {
-      return handler(null);
+  const handleMouseLeave = () => {
+    if (onCardHover) {
+      return onCardHover(null);
     }
   };
 
   return (
     <article
       className={`${page}__card place-card`}
-      onMouseEnter={handlerCardMouseEnter}
-      onMouseLeave={handlerCardMouseLeave}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {isPremium &&
         <div className="place-card__mark">

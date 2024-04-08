@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 
 import { AppRoute } from '../../const';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { useAppSelector } from '../../hooks/useAppSelector';
-import { useFavoriteCount } from '../../hooks/useFavoritesCount';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
+import { useFavoriteCount } from '../../hooks/use-favorites-count';
 import { logoutAction } from '../../store/api-actions';
 import { getUserData } from '../../store/selectors/user-selectors';
 
