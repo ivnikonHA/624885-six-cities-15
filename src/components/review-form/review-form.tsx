@@ -31,8 +31,8 @@ export default function ReviewForm(): JSX.Element {
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleFormSuccess = () => {
+    setFormData({rating: '', review: '' });
     formRef.current?.reset();
-    setFormData({...formData, review: '' });
     toast.success('Review published');
   };
   const handleFormError = () => {
