@@ -12,12 +12,12 @@ import ReviewForm from '../../components/review-form/review-form';
 import ReviewsItems from '../../components/reviews-items/reviews-items';
 import Stars from '../../components/stars/stars';
 import { AuthorizationStatus, OfferPageCounts, Pages } from '../../const';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { useAppSelector } from '../../hooks/useAppSelector';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { fetchNearbyOffers, fetchOfferByIdAction, fetchReviews } from '../../store/api-actions';
-import { getCurrentOffer, getNearbyOffers, getOfferDataLoadingStatus } from '../../store/selectors/offer-selectors';
-import { getReviews } from '../../store/selectors/reviews-selectors';
-import { getAuthorizationStatus } from '../../store/selectors/user-selectors';
+import { getCurrentOffer, getNearbyOffers, getOfferDataLoadingStatus } from '../../store/offer/offer-selectors';
+import { getReviews } from '../../store/reviews/reviews-selectors';
+import { getAuthorizationStatus } from '../../store/user/user-selectors';
 import LoadingPage from '../loading-page/loading-page';
 import NotFoundPage from '../not-found-page/not-found-page';
 

@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 import Header from '../../components/header/header';
 import RandomCityButton from '../../components/random-city-button/random-city-button';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { loginAction } from '../../store/api-actions';
 import { AuthData } from '../../types/auth-data';
 

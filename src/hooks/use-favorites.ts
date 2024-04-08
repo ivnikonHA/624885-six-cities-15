@@ -1,6 +1,6 @@
 import { RequestStatus } from '../const';
-import { getFavorites, getFavoritesStatus } from '../store/selectors/offers-selectors';
-import { useAppSelector } from './useAppSelector';
+import { getFavorites, getFavoritesStatus } from '../store/favorites/favorites-selectors';
+import { useAppSelector } from './use-app-selector';
 
 export function useFavorites() {
   const favorites = useAppSelector(getFavorites);

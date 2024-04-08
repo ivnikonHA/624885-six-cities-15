@@ -1,14 +1,14 @@
 import { memo, useCallback, useMemo } from 'react';
 
 import { Pages } from '../../const';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { useAppSelector } from '../../hooks/useAppSelector';
-import { getSortType } from '../../store/selectors/offers-selectors';
-import { activeOffer } from '../../store/slices/offers-slice';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
+import { getSortType } from '../../store/offers/offers-selectors';
+import { activeOffer } from '../../store/offers/offers-slice';
 import { OfferType } from '../../types/offers';
-import { sorting } from '../../utils';
 import CardsList from '../cards-list/cards-list';
 import SortingForm from '../sorting-form/sorting-form';
+import { sorting } from './utils';
 
 type CardsSectionProps = {
   offers: Array<OfferType>;
@@ -31,7 +31,7 @@ function CardsSection({ offers, currentCity }: CardsSectionProps): JSX.Element {
       <b className="places__found">{placesCount} {placesCount === 1 ? 'place' : 'places'} to stay in {currentCity}</b>
       <SortingForm />
       <div className="cities__places-list places__list tabs__content">
-        <CardsList offers={sortedOffers} page={Pages.Main} handler={handleCardHover} />
+        <CardsList offers={sortedOffers} page={Pages.Main} onCardHover={handleCardHover} />
       </div>
     </section>
   );

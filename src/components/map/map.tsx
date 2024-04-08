@@ -4,7 +4,7 @@ import leaflet, { LayerGroup } from 'leaflet';
 import { useEffect, useRef } from 'react';
 
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
-import useMap from '../../hooks/useMap';
+import useMap from '../../hooks/use-map';
 import { CityType, MapOffer } from '../../types/offers';
 
 type MapProps = {

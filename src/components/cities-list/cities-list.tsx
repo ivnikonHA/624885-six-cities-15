@@ -2,12 +2,12 @@ import cn from 'classnames';
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 
-import { CITIES } from '../../const';
+import { CITIES, DEFAULT_CITY } from '../../const';
 import { CitiesListItems } from '../../const';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { useAppSelector } from '../../hooks/useAppSelector';
-import { getCurrentCity } from '../../store/selectors/offers-selectors';
-import { changeCurrentCity } from '../../store/slices/offers-slice';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
+import { getCurrentCity } from '../../store/offers/offers-selectors';
+import { changeCurrentCity } from '../../store/offers/offers-slice';
 
 function CitiesList(): JSX.Element {
   const citiesNamesList = Object.values(CitiesListItems);
@@ -25,7 +25,7 @@ function CitiesList(): JSX.Element {
             onClick={() =>
               dispatch(
                 changeCurrentCity({
-                  city: CITIES.find((city) => city.name === item) || CITIES[0],
+                  city: CITIES.find((city) => city.name === item) ?? DEFAULT_CITY,
                 })
               )}
           >

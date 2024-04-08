@@ -3,10 +3,9 @@ import { memo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { AppRoute } from '../../const';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { useAppSelector } from '../../hooks/useAppSelector';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAuth } from '../../hooks/use-auth';
 import { setFavoriteById } from '../../store/api-actions';
-import { getIsAuthorized } from '../../store/selectors/user-selectors';
 
 type FavoriteButtonProps = {
   page: 'place-card' | 'offer';
@@ -15,26 +14,26 @@ type FavoriteButtonProps = {
 }
 
 function FavoriteButtonComponent({page, offerId, isFavorite}: FavoriteButtonProps): JSX.Element {
-  const [isSet, toggleStatus] = useState(isFavorite);
+  const [isInFavoriteStatus, toggleFavoriteStatus] = useState(isFavorite);
   const navigate = useNavigate();
   const buttonClass = cn(
     `${page}__bookmark-button button`,
-    {[`${page}__bookmark-button--active`]: isSet}
+    {[`${page}__bookmark-button--active`]: isInFavoriteStatus}
   );
   const buttonDimensions = {
     'place-card': {width: '18', height: '19'},
     'offer':  {width: '31', height: '32'},
   };
   const dispatch = useAppDispatch();
-  const isAuthorized = useAppSelector(getIsAuthorized);
+  const isAuthorized = useAuth();
 
   const handleFavoriteButtonClick = () => {
     if(!isAuthorized) {
       navigate(AppRoute.Login);
       return;
     }
-    dispatch(setFavoriteById({id: offerId, isFavorite: !isSet}));
-    toggleStatus((prevStatus) => !prevStatus);
+    dispatch(setFavoriteById({id: offerId, isFavorite: !isInFavoriteStatus}));
+    toggleFavoriteStatus((prevStatus) => !prevStatus);
   };
 
   return (
