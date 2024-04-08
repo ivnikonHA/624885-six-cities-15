@@ -3,12 +3,12 @@ import { memo, useCallback, useMemo } from 'react';
 import { Pages } from '../../const';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { getSortType } from '../../store/selectors/offers-selectors';
-import { activeOffer } from '../../store/slices/offers-slice';
+import { getSortType } from '../../store/offers/offers-selectors';
+import { activeOffer } from '../../store/offers/offers-slice';
 import { OfferType } from '../../types/offers';
-import { sorting } from '../../utils';
 import CardsList from '../cards-list/cards-list';
 import SortingForm from '../sorting-form/sorting-form';
+import { sorting } from './utils';
 
 type CardsSectionProps = {
   offers: Array<OfferType>;

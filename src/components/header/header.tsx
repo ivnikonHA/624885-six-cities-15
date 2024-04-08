@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { getAuthorizationStatus } from '../../store/selectors/user-selectors';
+import { getAuthorizationStatus } from '../../store/user/user-selectors';
 import { LoggedNavigation } from '../logged-navigation/logged-navigation';
 import Logo from '../logo/logo';
 

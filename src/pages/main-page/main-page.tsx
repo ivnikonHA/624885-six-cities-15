@@ -8,7 +8,7 @@ import Header from '../../components/header/header';
 import MainEmpty from '../../components/main-empty/main-empty';
 import Map from '../../components/map/map';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { getActiveOffer, getCurrentCity, getOffers } from '../../store/selectors/offers-selectors';
+import { getActiveOffer, getCurrentCity, getOffers } from '../../store/offers/offers-selectors';
 
 function MainPage(): JSX.Element {
   const currentCity = useAppSelector(getCurrentCity);

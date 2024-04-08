@@ -10,7 +10,7 @@ import { loadMainPageData } from '../../pages/main-page/loader';
 import MainPage from '../../pages/main-page/main-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import OfferPage from '../../pages/offer-page/offer-page';
-import { getOffersDataLoadingStatus } from '../../store/selectors/offers-selectors';
+import { getOffersDataLoadingStatus } from '../../store/offers/offers-selectors';
 import PrivateRoute from '../private-route/private-route';
 import PublicRoute from '../public-route/public-route';
 

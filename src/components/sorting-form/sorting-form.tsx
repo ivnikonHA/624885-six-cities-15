@@ -3,7 +3,7 @@ import { useState } from 'react';
 import SortList from '../../components/sort-list/sort-list';
 import { SortOptions } from '../../const';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { changeSortType } from '../../store/slices/offers-slice';
+import { changeSortType } from '../../store/offers/offers-slice';
 
 export default function SortingForm() {
   const [isOpened, setIsOpened] = useState(false);

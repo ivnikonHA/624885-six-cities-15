@@ -6,8 +6,8 @@ import { CITIES, DEFAULT_CITY } from '../../const';
 import { CitiesListItems } from '../../const';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { getCurrentCity } from '../../store/selectors/offers-selectors';
-import { changeCurrentCity } from '../../store/slices/offers-slice';
+import { getCurrentCity } from '../../store/offers/offers-selectors';
+import { changeCurrentCity } from '../../store/offers/offers-slice';
 
 function CitiesList(): JSX.Element {
   const citiesNamesList = Object.values(CitiesListItems);

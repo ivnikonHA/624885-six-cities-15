@@ -4,8 +4,8 @@ import { toast } from 'react-toastify';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { postReviewAction } from '../../store/api-actions';
-import { getCurrentOffer } from '../../store/selectors/offer-selectors';
-import { getIsReviewPosting } from '../../store/selectors/reviews-selectors';
+import { getCurrentOffer } from '../../store/offer/offer-selectors';
+import { getIsReviewPosting } from '../../store/reviews/reviews-selectors';
 import { ReviewType } from '../../types/comments';
 
 type ChangeHandler = ReactEventHandler<HTMLInputElement | HTMLTextAreaElement>;

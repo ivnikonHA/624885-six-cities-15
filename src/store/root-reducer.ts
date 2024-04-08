@@ -1,11 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
 import { NameSpace } from '../const';
-import { favoritesSlice } from './slices/favorites-slice';
-import { offerSlice } from './slices/offer-slice';
-import { offersSlice } from './slices/offers-slice';
-import { reviewsSlice } from './slices/reviews-slice';
-import { userSlice } from './slices/user-slice';
+import { favoritesSlice } from './favorites/favorites-slice';
+import { offerSlice } from './offer/offer-slice';
+import { offersSlice } from './offers/offers-slice';
+import { reviewsSlice } from './reviews/reviews-slice';
+import { userSlice } from './user/user-slice';
 
 const rootReducer = combineReducers({
   [NameSpace.Favorites]: favoritesSlice.reducer,

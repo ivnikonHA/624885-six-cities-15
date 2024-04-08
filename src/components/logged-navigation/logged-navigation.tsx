@@ -5,7 +5,7 @@ import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { useFavoriteCount } from '../../hooks/use-favorites-count';
 import { logoutAction } from '../../store/api-actions';
-import { getUserData } from '../../store/selectors/user-selectors';
+import { getUserData } from '../../store/user/user-selectors';
 
 export function LoggedNavigation() {
   const userData = useAppSelector(getUserData);
