@@ -32,7 +32,6 @@ export default function ReviewForm(): JSX.Element {
 
   const handleFormSuccess = () => {
     setFormData({rating: '', review: '' });
-    formRef.current?.reset();
     toast.success('Review published');
   };
   const handleFormError = () => {
@@ -71,6 +70,7 @@ export default function ReviewForm(): JSX.Element {
               value={stars}
               id={`${stars}-stars`}
               type="radio"
+              checked={Number(formData.rating) === Number(stars)}
               disabled={isReviewPosting}
             />
             <label
