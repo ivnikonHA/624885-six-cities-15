@@ -37,7 +37,8 @@ const offersSlice = createSlice({
       .addCase(fetchOffersAction.pending, (state) => {
         state.status = RequestStatus.Loading;
       })
-      .addCase(fetchOffersAction.rejected, () => {
+      .addCase(fetchOffersAction.rejected, (state) => {
+        state.status = RequestStatus.Failed;
         toast.error('Error loading offers data');
       })
       .addCase(setFavoriteById.fulfilled, (state, action) => {
